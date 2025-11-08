@@ -6,12 +6,6 @@ import { UploadApiResponse } from "cloudinary";
 import { error } from "console";
 
 
-interface CloudinaryUploadResult {
-  secure_url: string;
-  [key: string]: any; // pour les autres propriétés éventuelles
-}
-
-// ✅ CREATE PROJECT
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
@@ -38,23 +32,25 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // 📤 Upload image to Cloudinary
-     const arrayBuffer = await file.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer);
+    // Convertir le fichier en buffer
+    const arrayBuffer = await file.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
 
-        const uploadResult: CloudinaryUploadResult = await new Promise((resolve, reject) => {
-  cloudinary.uploader.upload_stream(
-    { resource_type: 'image', folder: 'DevEvent' },
-    (error, result) => {
-      if (error) return reject(error);
-      resolve(result as CloudinaryUploadResult);
-    }
-  ).end(buffer);
-});
- 
-projectData.image = uploadResult.secure_url;
+    // Upload vers Cloudinary
+    const uploadResult = await new Promise((resolve, reject) => {
+      cloudinary.uploader.upload_stream(
+        { resource_type: "image", folder: "DevEvent" },
+        (error, result) => {
+          if (error) return reject(error);
+          resolve(result);
+        }
+      ).end(buffer);
+    });
 
-    // 🧩 Create the project
+    // Forcer le type et récupérer l'URL sécurisée
+    projectData.image = (uploadResult as { secure_url: string }).secure_url;
+
+    // Créer le projet
     const createdProject = await Project.create({
       ...projectData,
       tags,
@@ -75,6 +71,7 @@ projectData.image = uploadResult.secure_url;
     );
   }
 }
+
 
 // ✅ GET ALL PROJECTS
 export async function GET() {
