@@ -23,7 +23,7 @@ const ProjectList = async () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       {projects.map((project) => (
-        <PortfolioCard key={project._id || project.title} {...project} />
+        <PortfolioCard key={project.title} {...project} />
       ))}
     </div>
   )
