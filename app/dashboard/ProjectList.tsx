@@ -26,7 +26,7 @@ const ProjectList = async () => {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-      {projects.map((project) => (
+      {projects.map((project : Project) => (
         <PortfolioCard
           key={project._id}
           title={project.title}

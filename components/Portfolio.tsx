@@ -6,6 +6,18 @@ import connectDB from '@/lib/mongodb'
 import getBaseUrl from '@/lib/url.action'
 
 
+interface Project {
+  _id: string
+  title: string
+  slug: string
+  image: string
+  tags: string[]
+  href?: string
+  createdAt?: string
+  updatedAt?: string
+}
+
+
 export default async function Portfolio(): Promise<JSX.Element> {
   const BASE_URL = getBaseUrl();
   const response = await fetch(`${BASE_URL}/api/portfolio`)
@@ -32,8 +44,15 @@ export default async function Portfolio(): Promise<JSX.Element> {
       {projects.length > 0 ? (
         <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12">
           {
-            projects.map((project) => (
-              <PortfolioCard key={project._id || project.title}  {...project} />
+            projects.map((project : Project) => (
+              <PortfolioCard
+                       key={project._id}
+                       title={project.title}
+                       slug={project.slug}
+                       image={project.image}
+                       tags={project.tags}
+                       href={project.href || `/projects/${project.slug}`}
+                     />
             ) )
           }
         </div>
