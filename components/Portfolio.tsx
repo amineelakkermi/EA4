@@ -1,4 +1,4 @@
-import React, { JSX } from 'react'
+import{ JSX } from 'react'
 import styles from '@/styles/style'
 import PortfolioCard from './PortfolioCard'
 import { Project as ProjectModel } from '@/database'
@@ -20,10 +20,13 @@ interface Project {
 
 
 export default async function Portfolio(): Promise<JSX.Element> {
-  'use cache'
+   'use cache'
   cacheLife('hours')
+
   const BASE_URL = getBaseUrl();
-  const response = await (fetch(`${BASE_URL}/api/portfolio` , { next: { revalidate: 3600 } } ));
+
+  const response = await fetch(`${BASE_URL}/api/portfolio`, { next: { revalidate: 3600 } })
+
 
   // Vérifie que la réponse est correcte
   if (!response.ok) {
