@@ -36,7 +36,6 @@ export default function ProjectForm(){
   }
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
       <section className="w-full py-10 bg-white">
       <div className="max-w-3xl mx-auto p-6 rounded-xl border shadow-sm">
         <h2 className="text-2xl font-bold mb-6">Add New Project</h2>
@@ -118,6 +117,5 @@ export default function ProjectForm(){
         </form>
       </div>
     </section>
-    </Suspense>
   )
 }

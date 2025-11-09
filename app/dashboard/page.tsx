@@ -3,6 +3,7 @@ import ProjectForm from './ProjectForm'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/authIOptions'
 import { redirect } from 'next/navigation'
+import { Suspense } from 'react'
 
 const DashboardPage = async () => {
   const session = await getServerSession(authOptions)
@@ -11,7 +12,8 @@ const DashboardPage = async () => {
   if (session.user?.role !== 'admin') redirect('/')
 
   return (
-    <section
+   <Suspense fallback={<div>Loading...</div>}>
+     <section
   id="home"
   aria-labelledby="hero-title"
   className="relative isolate min-h-screen flex flex-col items-center justify-center bg-white px-4 md:px-10"
@@ -24,6 +26,8 @@ const DashboardPage = async () => {
 
   
    </section>
+
+   </Suspense>
   )
 }
 
