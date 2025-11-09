@@ -4,6 +4,7 @@ import PortfolioCard from './PortfolioCard'
 import { Project as ProjectModel } from '@/database'
 import connectDB from '@/lib/mongodb'
 import getBaseUrl from '@/lib/url.action'
+import { cacheLife } from 'next/cache'
 
 
 interface Project {
@@ -19,8 +20,10 @@ interface Project {
 
 
 export default async function Portfolio(): Promise<JSX.Element> {
+  'use cache'
+  cacheLife('hours')
   const BASE_URL = getBaseUrl();
-  const response = await fetch(`${BASE_URL}/api/portfolio`)
+  const response = await (fetch(`${BASE_URL}/api/portfolio` , { next: { revalidate: 3600 } } ));
 
   // Vérifie que la réponse est correcte
   if (!response.ok) {
