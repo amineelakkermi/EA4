@@ -74,9 +74,7 @@ export default function LoginPage() {
           Se connecter
         </button>
 
-        <p className="text-center text-gray-400 text-sm">
-          &copy; {new Date().getFullYear()} MonSite. Tous droits réservés.
-        </p>
+      
       </form>
     </div>
   );
