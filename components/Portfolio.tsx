@@ -1,37 +1,29 @@
 import { JSX } from 'react'
 import styles from '@/styles/style'
 import PortfolioCard from './PortfolioCard'
-import { notFound } from 'next/navigation'
-import getBaseUrl from '@/lib/url.action'
 import { cacheLife } from 'next/cache'
+import { GET } from '@/app/api/portfolio/route' // استدعاء مباشر
+
+interface Project {
+  _id: string
+  title: string
+  slug: string
+  image: string
+  tags: string[]
+  href: string
+}
 
 export default async function Portfolio(): Promise<JSX.Element> {
-  'use cache';
+  'use cache'
   cacheLife('hours')
 
-  // 🔧 تأكد أن لديك دالة getBaseUrl تعمل في كل البيئات
-  const BASE_URL = getBaseUrl()
-  let projects = [] // 🟢 تعريف المتغير في النطاق العام
+  let projects: Project[] = []
 
   try {
-    const response = await fetch(`${BASE_URL}/api/portfolio`, { next: { revalidate: 3600 } })
-    console.log('🌐 BASE_URL =', BASE_URL)
-
-    
-
-    if (!response.ok) {
-      if (response.status === 404) {
-        return notFound()
-      }
-      console.error(`⚠️ Failed to fetch portfolio: ${response.status} ${response.statusText}`)
-    } else {
-      const data = await response.json()
-      projects = data.projects || []
-    }
-
+    const data = await GET() // استدعاء داخلي مباشر
+    projects = data.projects || []
   } catch (error) {
     console.error('🚨 Error fetching portfolio:', error)
-    // لا نرمي الخطأ حتى لا يتوقف الـ build في Vercel
   }
 
   return (

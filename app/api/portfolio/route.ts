@@ -79,20 +79,12 @@ projectData.image = uploadResult.secure_url;
 // ✅ GET ALL PROJECTS
 export async function GET() {
   try {
-    await connectDB();
-    const projects = await Project.find().sort({ createdAt: -1 });
-    return NextResponse.json(
-      { message: "Projects fetched successfully", projects },
-      { status: 200 }
-    );
+    await connectDB()
+    const projects = await Project.find().sort({ createdAt: -1 })
+    return { projects } // فقط المشاريع
   } catch (error: unknown) {
-    return NextResponse.json(
-      {
-        message: "Failed to fetch projects",
-        error: error instanceof Error ? error.message : "Unknown error",
-      },
-      { status: 500 }
-    );
+    console.error('Failed to fetch projects:', error)
+    return { projects: [] }
   }
 }
 
