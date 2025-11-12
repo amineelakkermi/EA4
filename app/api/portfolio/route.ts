@@ -4,6 +4,7 @@ import connectDB from "@/lib/mongodb";
 import { NextRequest, NextResponse } from "next/server";
 import { UploadApiResponse } from "cloudinary";
 import { error } from "console";
+import { stat } from "fs";
 
 
 interface CloudinaryUploadResult {
@@ -76,18 +77,33 @@ projectData.image = uploadResult.secure_url;
   }
 }
 
-// ✅ GET ALL PROJECTS
+{/*
 export async function GET() {
   try {
+    console.log('Connecting to MongoDB...')
     await connectDB()
+    console.log('Connected! Fetching projects...')
     const projects = await Project.find().sort({ createdAt: -1 })
-    return { projects } // فقط المشاريع
+    console.log(`Found ${projects.length} projects`)
+    return { projects }
   } catch (error: unknown) {
     console.error('Failed to fetch projects:', error)
     return { projects: [] }
   }
-}
+}  
+*/}
 
+export async function GET(){
+  try{
+    await connectDB();
+    const projects = await Project.find().sort({ createdAt: -1});
+    NextResponse.json({ message : "Projects fetched successefully" , projects } , { status: 200 });
+    return projects;
+  } catch(error: unknown){
+    console.error(`Failed to fetch projects` , error);
+    return NextResponse.json({ message: "Failed to fetch projects" } , { status : 500 });
+  }
+}
 
 // ✅ UPDATE PROJECT
 export async function PUT(req: NextRequest) {

@@ -2,29 +2,25 @@ import { JSX } from 'react'
 import styles from '@/styles/style'
 import PortfolioCard from './PortfolioCard'
 import { cacheLife } from 'next/cache'
-import { GET } from '@/app/api/portfolio/route' // استدعاء مباشر
+import getBaseUrl from '@/lib/url.action'
+import { notFound } from 'next/navigation'
+import { GET } from '@/app/api/portfolio/route'
 
-interface Project {
-  _id: string
-  title: string
-  slug: string
-  image: string
-  tags: string[]
-  href: string
+interface Project{
+  _id: string;
+  title: string;
+  slug: string;
+  image: string;
+  tags: string[];
+  href: string;
 }
 
 export default async function Portfolio(): Promise<JSX.Element> {
-  'use cache'
-  cacheLife('hours')
+  'use cache';
+  cacheLife('hours');
 
-  let projects: Project[] = []
+ const projects = await GET(); 
 
-  try {
-    const data = await GET() // استدعاء داخلي مباشر
-    projects = data.projects || []
-  } catch (error) {
-    console.error('🚨 Error fetching portfolio:', error)
-  }
 
   return (
     <section
@@ -55,5 +51,5 @@ export default async function Portfolio(): Promise<JSX.Element> {
         </div>
       )}
     </section>
-  )
+  );
 }
