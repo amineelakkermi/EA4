@@ -14,7 +14,8 @@ export default async function Portfolio(): Promise<JSX.Element> {
   let projects = [] // 🟢 تعريف المتغير في النطاق العام
 
   try {
-    const response = await fetch(`${BASE_URL}/api/portfolio`, { next: { revalidate: 3600 } })
+    const response = await fetch(`${process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'}/api/portfolio`, { next: { revalidate: 3600 } })
+
 
     if (!response.ok) {
       if (response.status === 404) {
