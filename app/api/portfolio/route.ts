@@ -97,7 +97,6 @@ export async function GET(){
   try{
     await connectDB();
     const projects = await Project.find().sort({ createdAt: -1});
-    NextResponse.json({ message : "Projects fetched successefully" , projects } , { status: 200 });
     return projects;
   } catch(error: unknown){
     console.error(`Failed to fetch projects` , error);

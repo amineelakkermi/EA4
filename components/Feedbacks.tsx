@@ -1,22 +1,41 @@
 'use client'
 
-import React, { JSX, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from '@/styles/style'
-import { feedbacks, type Feedback } from '@/constants/data'
 
-export default function Feedbacks(): JSX.Element {
-  const trackRef = useRef<HTMLDivElement>(null)
+interface Feedback{
+  _id: string;
+  name: string;
+  role: string;
+  content: string,
+}
 
-  const scrollByCards = (dir: 'prev' | 'next') => {
+export default function Feedbacks() {
+  const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
+  const trackRef = useRef(null)
+
+  // 🧩 جلب البيانات من API
+  useEffect(() => {
+   const fetchFeedbacks = async () => {
+    try{
+      const res = await fetch('/api/feedback');
+      const data = await res.json();
+      setFeedbacks(data.feedbacks);
+    } catch(error){
+      console.log(error);
+    }
+   }
+   fetchFeedbacks();
+  } , []);
+
+  // 🔄 تمرير السلايدر
+  const scrollByCards = (dir: string) => {
     const el = trackRef.current
     if (!el) return
-    const firstCard = el.querySelector<HTMLElement>('[data-card]')
-    const cardWidth = firstCard
-      ? firstCard.getBoundingClientRect().width
-      : el.clientWidth
+    const firstCard = el.querySelector('[data-card]');
+    const cardWidth = firstCard ? firstCard.getBoundingClientRect().width : el.clientWidth
     const cs = getComputedStyle(el)
-    const gap =
-      parseFloat(cs.gap || cs.columnGap || cs.rowGap || '0') || 0
+    const gap = parseFloat(cs.gap || cs.columnGap || cs.rowGap || '0') || 0
     const delta = cardWidth + gap
     el.scrollBy({ left: dir === 'next' ? delta : -delta, behavior: 'smooth' })
   }
@@ -69,19 +88,25 @@ export default function Feedbacks(): JSX.Element {
 
         <div className="shrink-0 w-16 sm:w-24 lg:w-28" aria-hidden />
 
-        {feedbacks.map((fb: Feedback) => (
-          <article
-            key={fb.id}
-            data-card
-            className="shrink-0 snap-center w-[88vw] sm:w-[560px] lg:w-[640px] bg-black text-white rounded-2xl ring-1 ring-black p-6 sm:p-8 md:p-10"
-          >
-            <p className="text-lg md:text-xl leading-relaxed">{fb.quote}</p>
-            <div className="mt-6 flex items-center gap-2 text-sm md:text-base">
-              <span className="font-semibold">{fb.author}</span>
-              <span className="text-white/70">, {fb.role}</span>
-            </div>
-          </article>
-        ))}
+          {feedbacks.length > 0 ? (
+          feedbacks.map((fb: Feedback) => (
+            <article
+              key={fb._id}
+              data-card
+              className="shrink-0 snap-center w-[88vw] sm:w-[560px] lg:w-[640px] bg-black text-white rounded-2xl ring-1 ring-black p-6 sm:p-8 md:p-10"
+            >
+              <p className="text-lg md:text-xl leading-relaxed">{fb.content}</p>
+              <div className="mt-6 flex items-center gap-2 text-sm md:text-base">
+                <span className="font-semibold">{fb.name}</span>
+                <span className="text-white/70">, {fb.role}</span>
+              </div>
+            </article>
+          ))
+        ) : (
+          <div className="w-full max-w-7xl text-center py-20">
+            <p className="text-gray-500">Aucun feedback disponible pour le moment.</p>
+          </div>
+    )}  
 
         <div className="shrink-0 w-16 sm:w-24 lg:w-28" aria-hidden />
       </div>
