@@ -30,7 +30,6 @@ export default function UpdateProject({ id }: { id: string }) {
         if (!res.ok) throw new Error('Failed to fetch project')
         const data = await res.json()
 
-        console.log(id);
         const p: Project = data.project
         setProject(p)
         setTitle(p.title || '')
