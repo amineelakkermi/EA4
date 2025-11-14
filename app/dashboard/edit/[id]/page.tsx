@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+ 
 // app/dashboard/edit/[id]/page.tsx
 import UpdateProject from '../../UpdateProject'
 
