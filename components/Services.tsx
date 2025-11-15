@@ -19,11 +19,11 @@ const Services: React.FC = () => {
       delay={150}
       animateBy="words"
       direction="top"
-      className="text-[35px] lg:text-[64px] font-poppins font-[500]"/>
+      className={`${styles.title}`}/>
 
      
 
-      <div className="max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {servicesCardData.map((service: ServiceCardData, index: number) => (
           <ServicesCard key={service.id} service={service} index={index} />
         ))}

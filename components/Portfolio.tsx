@@ -13,44 +13,45 @@ export default async function Portfolio(): Promise<JSX.Element> {
   'use cache';
   cacheLife('hours');
 
-  const projects = await GET();
+  const projects: any[] = await GET();
 
   return (
     <section
       id="portfolio"
-      className={`${styles.padding} relative mt-12 min-h-screen w-full flex flex-col gap-10 md:gap-14 justify-start items-center`}
+      className={`${styles.padding} relative min-h-screen w-full flex flex-col justify-start items-center`}
       aria-labelledby="portfolio-title"
     >
 
-          
+      <div
+        className="w-full max-w-6xl mx-auto flex flex-col jutify-center flex-col gap-10"
+      >
+        <BlurText
+          text="A Glimpse Into 🎯 My Coding Journey"
+          delay={150}
+          animateBy="words"
+          direction="top"
+          className={`${styles.title} text-center`}
+        />
 
-       <BlurText
-      text="A Glimpse Into 🎯 My Coding Journey"
-      delay={150}
-      animateBy="words"
-      direction="top"
-      className={`${styles.title}`}/>
-
-  
-
-      {projects?.length > 0 ? (
-        <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12">
-          {projects.map((project) => (
-            <PortfolioCard
-              key={project._id}
-              title={project.title}
-              slug={project.slug}
-              image={project.image}
-              tags={project.tags}
-              href={project.href || `/projects/${project.slug}`}
-            />
-          ))}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12">
+          {projects?.length > 0 ? (
+            projects.map((project: any) => (
+              <PortfolioCard
+                key={project._id}
+                title={project.title}
+                slug={project.slug}
+                image={project.image}
+                tags={project.tags}
+                href={project.href || `/projects/${project.slug}`}
+              />
+            ))
+          ) : (
+            <div className="w-full max-w-7xl text-center py-20">
+              <p className="text-gray-500">Aucun projet disponible pour le moment.</p>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="w-full max-w-7xl text-center py-20">
-          <p className="text-gray-500">Aucun projet disponible pour le moment.</p>
-        </div>
-      )}
+      </div>
     </section>
   )
 }

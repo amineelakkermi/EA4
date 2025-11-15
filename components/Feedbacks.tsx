@@ -49,7 +49,7 @@ export default function Feedbacks() {
       aria-labelledby="feedbacks-title"
     >
       {/* Header */}
-      <div className="w-full max-w-7xl border-b border-black/40 py-8 flex items-center justify-between">
+      <div className="w-full max-w-6xl border-b border-black/40 py-8 flex items-center justify-between">
      
 
 
@@ -88,7 +88,7 @@ export default function Feedbacks() {
       {/* Track */}
       <div
         ref={trackRef}
-        className="w-full max-w-7xl mt-4 flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 min-w-0 [-ms-overflow-style:none] [scrollbar-width:none]"
+        className="w-full max-w-6xl mt-4 flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory pb-2 min-w-0 [-ms-overflow-style:none] [scrollbar-width:none]"
       >
         <style>{`.snap-x::-webkit-scrollbar{display:none}`}</style>
 
