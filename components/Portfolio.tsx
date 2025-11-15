@@ -29,11 +29,9 @@ export default async function Portfolio(): Promise<JSX.Element> {
       delay={150}
       animateBy="words"
       direction="top"
-      className="text-[35px] lg:text-[64px] font-poppins font-[600]"/>
+      className={`${styles.title}`}/>
 
-    
-    
-    
+  
 
       {projects?.length > 0 ? (
         <div className="w-full max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12">

@@ -97,17 +97,15 @@ export default function Hero() {
             delay={150}
             animateBy="words"
             direction="top"
-            className="text-[35px] lg:text-[64px] font-poppins font-[600]"
-          />
-
+            className={`${styles.title}`}/>
+        
           <BlurText
             text={`CREATIVE WEB DEVELOPER`}
             delay={150}
             animateBy="words"
             direction="top"
-            className="text-[35px] lg:text-[64px] font-poppins font-[600]"
-          />
-
+            className={`${styles.title}`}/>
+        
           <p className="mx-auto max-w-3xl text-base sm:text-lg text-neutral-600">
             I’m a Web Developer specialized in creating fast and aesthetic web experiences
             using Next.js & TailwindCSS.

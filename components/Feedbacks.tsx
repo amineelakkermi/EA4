@@ -54,11 +54,12 @@ export default function Feedbacks() {
 
 
          <BlurText
-              text="WHAT CLIENT SAYS"
+              text="Client Testimonials"
               delay={150}
               animateBy="words"
               direction="top"
-              className="text-[35px] lg:text-[64px] font-poppins font-[600]"/>
+              className={`${styles.title}`}/>
+
 
         <div className="ml-6 hidden sm:flex items-center gap-3">
           <button

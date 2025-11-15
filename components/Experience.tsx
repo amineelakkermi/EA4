@@ -14,7 +14,7 @@ const Experience = () => {
       delay={150}
       animateBy="words"
       direction="top"
-      className="text-[35px] lg:text-[64px] font-poppins font-[600]"/>
+      className={`${styles.title}`}/>
       </div>
       <div className="w-[30%]">
         <Image src={experienceImg} width={215} height={215} alt='experience' />

@@ -75,7 +75,7 @@ export default function Contact(): JSX.Element {
       delay={150}
       animateBy="words"
       direction="top"
-      className="text-[35px] lg:text-[64px] font-poppins font-[600]"/>
+      className={`${styles.title}`}/>
 
           <p className="mt-3 text-sm sm:text-base text-neutral-600">
             Fill out the form and I’ll reach out within 24–48 hours.
