@@ -40,7 +40,7 @@ const socials: Social[] = [
 export default function Footer(): JSX.Element {
   return (
     <footer className="bg-black text-white">
-      <div className="mx-auto w-full max-w-7xl py-4 px-6 sm:px-10">
+      <div className="mx-auto w-full max-w-6xl mx-auto py-4 px-6 sm:px-10">
         <div className="h-16 sm:h-20 flex items-center justify-between">
           {/* Logo (EA4 text) */}
           <div className="logo">
