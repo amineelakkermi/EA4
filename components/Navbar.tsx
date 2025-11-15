@@ -1,9 +1,10 @@
 'use client'
 
 import Link from 'next/link'
-import React, { JSX, useEffect, useState } from 'react'
+import React, { JSX, useEffect, useRef, useState } from 'react'
 import logo from '@/public/logo.png'
 import Image from 'next/image'
+import gsap from 'gsap'
 
 interface NavItem {
   id: string
@@ -22,6 +23,8 @@ const navItems: NavItem[] = [
 export default function Navbar(): JSX.Element {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null)
+  const mobileListRef = useRef<HTMLUListElement | null>(null)
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 8)
@@ -29,7 +32,43 @@ export default function Navbar(): JSX.Element {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  
+  // Animation d'ouverture du menu mobile (panneau + items en stagger)
+  useEffect(() => {
+    if (!isOpen || !mobileMenuRef.current) return
+
+    const tl = gsap.timeline()
+
+    // Animation du conteneur
+    tl.fromTo(
+      mobileMenuRef.current,
+      { y: -16, opacity: 0, scale: 0.96 },
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 0.25,
+        ease: 'power3.out',
+      }
+    )
+
+    // Animation des items
+    if (mobileListRef.current) {
+      const items = Array.from(mobileListRef.current.querySelectorAll('li'))
+
+      tl.fromTo(
+        items,
+        { y: 8, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.22,
+          ease: 'power3.out',
+          stagger: 0.06,
+        },
+        '-=0.05'
+      )
+    }
+  }, [isOpen])
 
   return (
     <header className="fixed top-4 left-0 right-0 z-[999]">
@@ -111,8 +150,11 @@ export default function Navbar(): JSX.Element {
 
         {/* Mobile dropdown */}
         {isOpen && (
-          <div className="md:hidden mt-2 rounded-2xl border border-black/10 backdrop-blur-md supports-[backdrop-filter]:bg-white/40 bg-white/35 shadow-sm">
-            <ul className="flex flex-col py-2">
+          <div
+            ref={mobileMenuRef}
+            className="md:hidden mt-2 rounded-2xl border border-black/10 backdrop-blur-md supports-[backdrop-filter]:bg-white/40 bg-white/35 shadow-sm origin-top"
+          >
+            <ul ref={mobileListRef} className="flex flex-col py-2">
               {navItems.map((item) => (
                 <li key={item.id}>
                   <Link
