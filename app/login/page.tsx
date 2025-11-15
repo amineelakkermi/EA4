@@ -18,7 +18,7 @@ export default function LoginPage() {
       password,
     });
 
-    if (!res?.error) router.push("/dashboard");
+    if (!res?.error) router.push("/adminPanel04");
     else alert("Identifiants invalides");
   }
 
