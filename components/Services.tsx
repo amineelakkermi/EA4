@@ -9,8 +9,9 @@ const Services: React.FC = () => {
   return (
     <section
       id='services'
-      className={`${styles.padding} min-h-screen w-full flex flex-col gap-10 justify-center items-center`}
+      className={`${styles.padding} relative min-h-screen w-full flex flex-col gap-10 justify-center items-center`}
     >
+
 
 
       <BlurText
