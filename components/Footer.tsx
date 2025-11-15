@@ -12,18 +12,8 @@ type Social = {
 
 const socials: Social[] = [
   {
-    id: 'facebook',
-    href: 'https://facebook.com/',
-    label: 'Facebook',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.5l.5-4H14V7a1 1 0 0 1 1-1h3z" />
-      </svg>
-    ),
-  },
-  {
     id: 'instagram',
-    href: 'https://instagram.com/',
+    href: 'https://www.instagram.com/code_journeyyy/',
     label: 'Instagram',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -35,7 +25,7 @@ const socials: Social[] = [
   },
   {
     id: 'tiktok',
-    href: 'https://www.tiktok.com/',
+    href: 'https://www.tiktok.com/@codejourneyyy',
     label: 'TikTok',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 48 48" fill="currentColor">
@@ -43,26 +33,8 @@ const socials: Social[] = [
       </svg>
     ),
   },
-  {
-    id: 'snapchat',
-    href: 'https://www.snapchat.com/',
-    label: 'Snapchat',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 64 64" fill="currentColor">
-        <path d="M32 8c8.8 0 16 7.2 16 16v6.9c0 2.6 2.2 4.7 4.8 4.7.6 0 1.2.5 1.3 1.1.2.7-.2 1.4-.9 1.6-2.9.8-4.5 2.2-5.1 3.9-.7 2.2 1.1 3.6 4.3 4 .8.1 1.3.9 1.1 1.6-.2.7-.9 1.1-1.6 1-3.4-.5-6.1-1.6-8.2-3.1-3.3 4.5-8.2 7.7-12.7 7.7s-9.4-3.2-12.7-7.7c-2.1 1.5-4.8 2.6-8.2 3.1-.7.1-1.4-.3-1.6-1-.2-.7.3-1.5 1.1-1.6 3.2-.4 5-1.8 4.3-4-.6-1.7-2.2-3.1-5.1-3.9-.7-.2-1.1-.9-.9-1.6.2-.6.7-1.1 1.3-1.1 2.6 0 4.8-2.1 4.8-4.7V24C16 15.2 23.2 8 32 8z" />
-      </svg>
-    ),
-  },
-  {
-    id: 'x',
-    href: 'https://twitter.com/',
-    label: 'X',
-    icon: (
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M20.98 3H18.7l-5.1 6.2L8.4 3H3.02l7.38 10.18L3.3 21h2.28l5.68-6.9 5.07 6.9h5.45l-7.76-10.56L20.98 3z" />
-      </svg>
-    ),
-  },
+ 
+
 ]
 
 export default function Footer(): JSX.Element {
