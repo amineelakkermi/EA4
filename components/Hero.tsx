@@ -6,46 +6,36 @@ import Title from './Title'
 import BlurText from './BlurText'
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
-gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero() {
-  const heroRef = useRef<HTMLElement | null>(null)
+  const starRef = useRef<HTMLDivElement | null>(null)
   const rightIconRef = useRef<HTMLDivElement | null>(null)
-  const leftIconRef = useRef<HTMLDivElement | null>(null)
+  const triangleRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    if (!heroRef.current || !rightIconRef.current || !leftIconRef.current) return
+    const elements: (HTMLDivElement | null)[] = [rightIconRef.current, starRef.current, triangleRef.current]
+    const targets = elements.filter((el): el is HTMLDivElement => !!el)
+    if (!targets.length) return
 
-    const ctx = gsap.context(() => {
-      const scrollConfig: gsap.plugins.ScrollTriggerInstanceVars = {
-        trigger: heroRef.current!,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true,
+    gsap.fromTo(
+      targets,
+      { y: -60, opacity: 0 },
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.2,
+        ease: 'power3.out',
+        stagger: 0.15,
       }
-
-      gsap.fromTo(
-        rightIconRef.current,
-        { y: -40 },
-        { y: 40, ease: 'power1.inOut', scrollTrigger: scrollConfig }
-      )
-
-      gsap.fromTo(
-        leftIconRef.current,
-        { y: -30 },
-        { y: 30, ease: 'power1.inOut', scrollTrigger: scrollConfig }
-      )
-    }, heroRef)
-
-    return () => ctx.revert()
+    )
   }, [])
 
+   
+ 
   return (
     // 1) Section: centered vertically (grid) + 100svh pour mobile
     <section
-      ref={heroRef}
       id="home"
       aria-labelledby="hero-title"
       className="relative isolate min-h-[100svh] grid place-items-center overflow-hidden bg-white"
@@ -67,8 +57,7 @@ export default function Hero() {
 
       <div
         ref={rightIconRef}
-        className="absolute -z-10 right-[10%] top-[30%]"
-      >
+        className="absolute -z-10 right-[10%] top-[30%]">
         <svg width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12.0593 39.4507C12.5538 41.1159 14.4552 41.4894 17.7077 40.5674C20.6632 39.7311 24.3731 37.9044 28.1557 35.4268C31.9382 32.9492 35.3446 30.1092 37.7533 27.4342C40.4043 24.4855 41.498 22.1503 41.0021 20.4871C40.6821 19.4092 39.7744 18.8748 38.2885 18.8797C37.3896 18.9034 36.494 19.0416 35.6115 19.2927L35.6019 19.2766L35.5816 19.3029C35.5056 19.3234 35.431 19.3398 35.3536 19.3643C32.3982 20.2026 28.6883 22.0293 24.9125 24.5069C21.1368 26.9844 17.7222 29.8224 15.3135 32.4975C12.6572 35.4542 11.5634 37.7855 12.0593 39.4507ZM25.2863 25.8028C28.2936 23.8349 31.2507 22.2855 33.7955 21.3294C31.5297 23.6847 28.4928 26.1558 25.1264 28.3592C22.4115 30.1403 19.605 31.5969 16.7335 32.715C19.0171 30.3819 22.0079 27.9473 25.2863 25.8028ZM14.9136 34.7759C18.0074 33.8928 21.967 31.9803 25.5164 29.653C29.8194 26.8343 33.6155 23.5646 35.9935 20.6351C37.5623 20.25 39.8134 20 40.128 21.0537C40.4755 22.2224 38.4376 24.8982 37.1778 26.3006C34.8259 28.9148 31.4817 31.696 27.7643 34.133C24.0468 36.57 20.4087 38.3601 17.5211 39.1799C16.5862 39.4523 15.6369 39.6041 14.684 39.6339C13.8106 39.6368 13.0901 39.4371 12.9158 38.8821C12.6615 37.9838 13.8046 36.1919 14.919 34.7759L14.9136 34.7759Z" fill="#1E2CFB" />
           <path d="M0.454173 35.3557L3.37373 45.1676C4.45347 48.7956 7.9145 50.5252 13.125 50.0519C18.1741 49.5912 24.3275 47.1294 30.4501 43.1202C36.5726 39.1111 41.9509 34.019 45.5773 28.7914C49.3225 23.4021 50.7914 18.438 49.7117 14.814L46.7921 5.00017C45.8317 1.75507 42.9486 0.023505 38.617 0.0379443C38.1106 0.0396326 37.5852 0.0656036 37.0409 0.115842C31.9918 0.576539 25.8383 3.03831 19.7158 7.04948C13.5933 11.0607 8.21501 16.1488 4.5886 21.3743C0.843364 26.7656 -0.624194 31.7317 0.454173 35.3557ZM48.844 15.3818C49.7372 18.381 48.3047 22.8991 44.9159 27.7788C41.3624 32.8911 36.0883 37.88 30.0659 41.8242C24.0435 45.7685 18.0052 48.1916 13.0633 48.6398C12.5439 48.6899 12.0434 48.7118 11.5618 48.7134C7.66974 48.7264 5.03715 47.2684 4.24142 44.5977C3.34963 41.5985 4.78069 37.0805 8.17085 32.2007C11.723 27.0865 16.9971 22.0955 23.0195 18.1513C29.0419 14.207 35.0802 11.788 40.0221 11.3357C44.7362 10.9064 47.9509 12.3806 48.844 15.3818ZM5.24994 22.3869C8.80347 17.2746 14.0776 12.2857 20.0999 8.34148C26.1223 4.39722 32.1606 1.97214 37.1026 1.5239C41.8167 1.10467 45.0313 2.5688 45.9231 5.57L47.7602 11.7417C46.3031 10.4896 44.1941 9.84091 41.5366 9.84977C41.0305 9.85146 40.5056 9.87541 39.9618 9.92564C34.9113 10.3843 28.7579 12.8481 22.6353 16.8573C16.5128 20.8664 11.1346 25.9545 7.50951 31.1821C5.06039 34.7089 3.58472 38.0549 3.15891 40.9536L1.31779 34.7859C0.428711 31.7442 1.8249 27.218 5.21826 22.342Z" fill="#1E2CFB" />
@@ -78,14 +67,17 @@ export default function Hero() {
         </svg>
       </div>
 
-      <div className="absolute hidden md:block -z-10 md:left-[10%] xl:left-[30%] top-[28%]">
+      <div
+        ref={starRef}
+        className="absolute hidden md:block -z-10 md:left-[10%] xl:left-[30%] top-[28%]"
+      >
         <svg width="48" height="46" viewBox="0 0 48 46" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M23.7764 0L29.3893 17.2746H47.5528L32.8582 27.9508L38.471 45.2254L23.7764 34.5491L9.08178 45.2254L14.6946 27.9508L0 17.2746H18.1636L23.7764 0Z" fill="#799EFF" />
         </svg>
       </div>
 
       <div
-        ref={leftIconRef}
+        ref={triangleRef}
         className="absolute  -z-10  left-[15%] bottom-[15%] xl:bottom-[30%]"
       >
         <svg width="36" height="39" viewBox="0 0 36 39" fill="none" xmlns="http://www.w3.org/2000/svg">
