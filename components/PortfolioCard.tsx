@@ -22,7 +22,7 @@ export default function PortfolioCard({ title , image, slug, href, tags }: Props
           alt={title}
           fill
           sizes="(min-width:1024px) 560px, 100vw"
-          className="object-cover"
+          className="object-cover hover:scale-105 transition duration-500"
         />
       </div>
 

@@ -8,9 +8,9 @@ const Experience = () => {
   return (
    <div id='experience' className='relative w-full'>
     <div className={`max-w-7xl mx-auto px-6 sm:px-10 py-24 flex justify-between items-center`}>
-      <div className="w-[70%]">
+      <div className="w-[90%]">
       <BlurText
-      text="At the Heart of Design is an Opportunity to slove problem"
+      text="Turning ideas into meaningful digital solutions"
       delay={150}
       animateBy="words"
       direction="top"
