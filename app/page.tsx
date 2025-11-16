@@ -1,5 +1,6 @@
 
 import Contact from '@/components/Contact'
+import EmailScrolling from '@/components/EmailScrolling'
 import Experience from '@/components/Experience'
 import Feedbacks from '@/components/Feedbacks'
 import Hero from '@/components/Hero'
@@ -16,6 +17,8 @@ const page = () => {
       <Portfolio />
       <Feedbacks />
       <Contact />
+      <EmailScrolling />
+
     </main>
   )
 }
