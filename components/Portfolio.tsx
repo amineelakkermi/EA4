@@ -18,7 +18,7 @@ export default async function Portfolio(): Promise<JSX.Element> {
   return (
     <section
       id="portfolio"
-      className={`${styles.padding} relative min-h-screen w-full flex flex-col justify-start items-center`}
+      className={`${styles.padding} relative min-h-[100svh] w-full flex flex-col justify-start items-center`}
       aria-labelledby="portfolio-title"
     >
 
@@ -33,7 +33,7 @@ export default async function Portfolio(): Promise<JSX.Element> {
           className={`${styles.title} text-center`}
         />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 md:gap-12">
           {projects?.length > 0 ? (
             projects.map((project: any) => (
               <PortfolioCard

@@ -6,6 +6,7 @@ import Title from './Title'
 import BlurText from './BlurText'
 import React, { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import Technologies from './Technologies'
 
 
 export default function Hero() {
@@ -87,24 +88,28 @@ export default function Hero() {
 
       {/* 2) Wrapper: retire mt-16/md:mt-8/lg:mt-16 qui décalaient vers le bas */}
       <div className="mx-auto max-w-7xl w-full px-6 sm:px-10 py-12">
-        <div className="mx-auto max-w-4xl text-center space-y-5">
+        <div className="mx-auto max-w-4xl text-center space-y-6">
           <p className="text-base md:text-lg text-black/80 ">
             Hello <span role="img" aria-label="waving hand">👋</span>, I’m Amine
           </p>
 
-          <BlurText
-            text={`UI DESIGNER`}
-            delay={150}
-            animateBy="words"
-            direction="top"
-            className={`${styles.title}`}/>
-        
-          <BlurText
-            text={`CREATIVE WEB DEVELOPER`}
-            delay={150}
-            animateBy="words"
-            direction="top"
-            className={`${styles.title}`}/>
+          <div className="flex flex-col space-y-2">
+            <BlurText
+              text={`UI DESIGNER`}
+              delay={150}
+              animateBy="words"
+              direction="top"
+              className={`${styles.title}`}
+            />
+          
+            <BlurText
+              text={`CREATIVE WEB DEVELOPER`}
+              delay={150}
+              animateBy="words"
+              direction="top"
+              className={`${styles.title}`}
+            />
+          </div>
         
           <p className="mx-auto max-w-3xl text-base sm:text-lg text-neutral-600">
             I’m a Web Developer specialized in creating fast and aesthetic web experiences
@@ -119,8 +124,10 @@ export default function Hero() {
               View Portfolio
             </Link>
           </div>
-        </div>
+        </div>    
       </div>
+
+    
     </section>
   )
 }

@@ -47,8 +47,8 @@ const Experience = () => {
   }, [])
 
   return (
-   <div id='experience' className='relative w-full'>
-    <div className={`max-w-6xl mx-auto px-6 sm:px-10 py-24 flex justify-between items-center`}>
+   <div id='experience' className={`${styles.padding} min-h-[500px] flex justify-between items-center relative w-full`}>
+    <div className={`max-w-6xl mx-auto mt-16 flex justify-between items-center `}>
       <div className="w-[95%]">
       <BlurText
       text="Turning ideas into meaningful digital solutions"
