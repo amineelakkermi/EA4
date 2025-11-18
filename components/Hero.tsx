@@ -42,18 +42,19 @@ export default function Hero() {
       className="relative isolate min-h-[100svh] grid place-items-center overflow-hidden bg-white"
     >
       <div className='absolute -z-10'>
-        <svg width="1440" height="820" viewBox="0 0 1440 820" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g filter="url(#filter0_f_7_579)">
-            <ellipse cx="122.953" cy="551.996" rx="122.953" ry="551.996" transform="matrix(-0.185795 0.982589 -0.950553 -0.310562 1267.33 460.357)" fill="#02ff5fff" fillOpacity="0.8" />
-          </g>
-          <defs>
-            <filter id="filter0_f_7_579" x="-5.42752" y="3.8147e-06" width="1450.42" height="819.48" filterUnits="userSpaceOnUse" colorInterpolation-filters="sRGB">
-              <feFlood floodOpacity="0" result="BackgroundImageFix" />
-              <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-              <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_7_579" />
-            </filter>
-          </defs>
-        </svg>
+       <svg width="1440" height="820" viewBox="0 0 1440 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_7_579)">
+<ellipse cx="122.953" cy="551.996" rx="122.953" ry="551.996" transform="matrix(-0.185795 0.982589 -0.950553 -0.310562 1267.33 460.357)" fill="#71ff4dff" fill-opacity="0.8"/>
+</g>
+<defs>
+<filter id="filter0_f_7_579" x="-5.42749" y="0" width="1450.42" height="819.48" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_7_579"/>
+</filter>
+</defs>
+</svg>
+
       </div>
 
    

@@ -15,7 +15,7 @@ const Technologies: React.FC = () => {
   const items = Array.from({ length: 8 }, () => technologies).flat();
 
   return (
-    <div className="relative w-full overflow-hidden select-none py-16 border-t border-gray-800 bg-black">
+    <div className="relative w-full overflow-hidden select-none my-16 py-16 border-t border-gray-800 bg-black">
       <div className="track" aria-hidden>
         {items.map((item, index) => (
           <span key={`a-${index}`} className="chunk">

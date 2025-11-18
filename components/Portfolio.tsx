@@ -8,6 +8,7 @@ import { Project } from '@/database'
 import { GET } from '@/app/api/portfolio/route'
 import Title from './Title'
 import BlurText from './BlurText'
+import Svg from './Svg'
 
 export default async function Portfolio(): Promise<JSX.Element> {
   'use cache';
@@ -23,15 +24,8 @@ export default async function Portfolio(): Promise<JSX.Element> {
     >
 
       <div
-        className="w-full max-w-6xl mx-auto flex flex-col jutify-center flex-col gap-10"
-      >
-        <BlurText
-          text="A Glimpse Into 🎯 My Coding Journey"
-          delay={150}
-          animateBy="words"
-          direction="top"
-          className={`${styles.title} text-center`}
-        />
+        className={` w-full max-w-6xl mx-auto flex flex-col jutify-center flex-col gap-10`}>
+        <h1 className={`${styles.title} flex items-center`}>A Glimpse Into My Coding Journey</h1>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 md:gap-12">
           {projects?.length > 0 ? (
@@ -51,6 +45,10 @@ export default async function Portfolio(): Promise<JSX.Element> {
             </div>
           )}
         </div>
+      </div>
+
+      <div className='absolute right-[5%] top-[3%] md:top-[0%]'>
+      <Svg />
       </div>
     </section>
   )
