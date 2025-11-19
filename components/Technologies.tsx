@@ -52,7 +52,7 @@ const Technologies: React.FC = () => {
               className='flex gap-5 items-center'
               rel="noreferrer noopener"
             >
-              <span className="label text-black">{item}</span>
+              <span className="label text-gray-900">{item}</span>
               <span className="plane-wrap" aria-hidden>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ const Technologies: React.FC = () => {
       <style jsx>{`
         .track { position: absolute; left: 0; top: 50%; display: inline-flex; gap: 3.5rem; width: max-content; transform: translateY(-50%); animation: scroll-x 120s linear infinite; white-space: nowrap; }
         .chunk { display: inline-flex; align-items: center; gap: 1.25rem; }
-        .label { font-weight: 600; font-size: clamp(2.05rem, 5vw, 2.0rem); letter-spacing: 0.01em; line-height: 1; }
+        .label { font-weight: 600; font-size: clamp(1.5rem, 5vw, 1.5rem); letter-spacing: 0.01em; line-height: 1; }
         .plane-wrap { display: inline-flex; align-items: center; justify-content: center; width: clamp(1.5rem, 4vw, 2rem); height: clamp(1.5rem, 4vw, 2rem); border-radius: 9999px; background: rgba(127,255,68,0.2); border: 1px solid rgba(0,0,0,0.1); }
         .plane { width: 50%; height: 50%; color: #fff; }
         @keyframes scroll-x { from { transform: translate(0, -50%); } to { transform: translate(-50%, -50%); } }
