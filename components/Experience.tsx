@@ -30,12 +30,12 @@ const Experience = () => {
 
     // RIGHT ICON (descend très vite)
     gsap.to(right, {
-      y: 100,
+      y: 140,
       ease: "none",
       scrollTrigger: {
         trigger: "#experience",
         start: "top 90%",
-        end: "bottom 120%",
+        end: "bottom 130%",
         scrub: 1.5,
       }
     })
@@ -46,7 +46,7 @@ const Experience = () => {
   return (
     <div
       id="experience"
-      className={`w-full relative lg:px-12 px-6 py-12 rounded-[35px] min-h-[500px] flex items-center`}
+      className={`w-full relative lg:px-12 px-6 pt-12 rounded-[35px] min-h-[400px] flex items-center`}
     >
       
       <div className='max-w-6xl mx-auto'>

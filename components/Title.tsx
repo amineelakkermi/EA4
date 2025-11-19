@@ -32,7 +32,7 @@ const Title = () => {
           trigger: titleRef.current,
           start: "top 80%",
           end: "bottom 80%",
-          scrub: 1,
+          scrub: 2,
         },
       }
     );
