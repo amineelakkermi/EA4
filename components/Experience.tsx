@@ -49,7 +49,7 @@ const Experience = () => {
       className={`w-full relative lg:px-12 px-6 pt-12 rounded-[35px] min-h-[400px] flex items-center`}
     >
       
-      <div className='max-w-6xl mx-auto'>
+      <div className='max-w-3xl mx-auto'>
        <Title />
       </div>
 

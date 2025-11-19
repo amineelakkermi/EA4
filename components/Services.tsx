@@ -11,7 +11,8 @@ const Services: React.FC = () => {
       id='services'
       className={`${styles.padding} relative min-h-[100svh] w-full flex flex-col gap-10 justify-center items-center`}
     >
-
+    
+      <div className='gradient2' />
 
 
       <BlurText

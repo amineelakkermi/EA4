@@ -40,8 +40,9 @@ export default function Hero() {
     <section
       id="home"
       aria-labelledby="hero-title"
-      className="relative isolate min-h-[100svh] grid place-items-center overflow-hidden"
+      className="relative isolate min-h-[100svh] grid place-items-center overflow-hidden bg-gradient-to-br from-white via-gray-50/30 to-lime-50/20"
     >
+
       <div className="pointer-events-none absolute inset-x-0 bottom-0 -z-10">      
         <svg
           className="w-full h-auto"

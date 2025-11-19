@@ -85,14 +85,14 @@ html, body {
 }
 
 .gradient1{
-  background: linear-gradient(#7fff44, #51ff00);
+  background: linear-gradient(#51ff00, #51ff00);
   filter: blur(100px);
   opacity: 1;
   width: 300px;
   height: 300px;
   border-radius: 50%;
   position: absolute;
-  top: 65%;
+  top: 15%;
   right: 15%;
   z-index: -1;
 }
