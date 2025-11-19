@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 
 const Technologies: React.FC = () => {
   const technologies = [
@@ -11,10 +12,11 @@ const Technologies: React.FC = () => {
     'Sanity',
   ];
 
-  const items = Array.from({ length: 8 }, () => technologies).flat();
+  // Réduire de 8 à 4 répétitions pour améliorer les performances
+  const items = Array.from({ length: 4 }, () => technologies).flat();
 
   return (
-    <div className="relative w-full overflow-hidden select-none p-16 border-t border-black/10">
+    <div className="relative w-full overflow-hidden select-none py-16 border-t border-black/10">
       <div className="track" aria-hidden>
         {items.map((item, index) => (
           <span key={`a-${index}`} className="chunk">
@@ -71,15 +73,11 @@ const Technologies: React.FC = () => {
       </div>
 
       <style jsx>{`
-        .track { position: absolute; left: 0; top: 50%; display: inline-flex; gap: 3.5rem; width: max-content; transform: translateY(-50%); animation: scroll-x 120s linear infinite; white-space: nowrap; will-change: transform; }
+        .track { position: absolute; left: 0; top: 50%; display: inline-flex; gap: 3.5rem; width: max-content; transform: translateY(-50%); animation: scroll-x 120s linear infinite; white-space: nowrap; }
         .chunk { display: inline-flex; align-items: center; gap: 1.25rem; }
         .label { font-weight: 600; font-size: clamp(2.05rem, 5vw, 2.0rem); letter-spacing: 0.01em; line-height: 1; }
-        .plane-wrap { display: inline-flex; align-items: center; justify-content: center; width: clamp(1.5rem, 4vw, 2rem); height: clamp(1.5rem, 4vw, 2rem); border-radius: 9999px; background: radial-gradient(circle at 30% 30%, rgba(127,255,68,0.45), rgba(127,255,68,0.12) 70%); border: 1px solid rgba(0,0,0,0.1); box-shadow: 0 2px 10px rgba(0,0,0,0.1); transform: translateZ(0); transition: transform 300ms ease, box-shadow 300ms ease, background 300ms ease; animation: plane-pulse 2.2s ease-in-out infinite; }
-        .plane { width: 50%; height: 50%; color: #fff; transition: transform 300ms ease; }
-        .chunk:hover .plane-wrap, a:focus-visible .plane-wrap { transform: scale(1.08) rotate(6deg); box-shadow: 0 4px 16px rgba(0,0,0,0.25); }
-        .chunk:hover .plane, a:focus-visible .plane { transform: rotate(12deg) translateY(-1px); }
-        @keyframes plane-pulse { 0%, 100% { box-shadow: 0 2px 12px rgba(0,0,0,0.1), inset 0 0 10px rgba(127,255,68,0.22); } 50% { box-shadow: 0 4px 16px rgba(0,0,0,0.18), inset 0 0 16px rgba(127,255,68,0.3); } }
-        .fade-edges { -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0)); mask-image: linear-gradient(to right, rgba(0,0,0,0), rgba(0,0,0,1) 10%, rgba(0,0,0,1) 90%, rgba(0,0,0,0)); }
+        .plane-wrap { display: inline-flex; align-items: center; justify-content: center; width: clamp(1.5rem, 4vw, 2rem); height: clamp(1.5rem, 4vw, 2rem); border-radius: 9999px; background: rgba(127,255,68,0.2); border: 1px solid rgba(0,0,0,0.1); }
+        .plane { width: 50%; height: 50%; color: #fff; }
         @keyframes scroll-x { from { transform: translate(0, -50%); } to { transform: translate(-50%, -50%); } }
       `}</style>
     </div>
