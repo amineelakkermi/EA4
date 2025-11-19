@@ -46,7 +46,7 @@ const Experience = () => {
   return (
     <div
       id="experience"
-      className={`w-full relative lg:px-12 px-6 pt-12 rounded-[35px] min-h-[500px] flex items-center`}
+      className={`w-full relative lg:px-12 px-6 py-12 rounded-[35px] min-h-[500px] flex items-center`}
     >
       
       <div className='max-w-6xl mx-auto'>

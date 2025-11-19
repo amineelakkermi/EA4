@@ -9,38 +9,47 @@ gsap.registerPlugin(ScrollTrigger);
 const Title = () => {
   const titleRef = useRef<HTMLHeadingElement | null>(null);
 
-  const staticText = "Turning ideas into ";
-  const animatedText =
-    "functional, scalable, and elegant digital solutions.";
+  const fullText = "With over two years of experience, I build fast and beautiful web experiences.";
 
   useLayoutEffect(() => {
     if (!titleRef.current) return;
 
-    const chars = titleRef.current.querySelectorAll(".char");
+    const words = titleRef.current.querySelectorAll(".word");
 
-    gsap.from(chars, {
-      opacity: 0,
-      y: 20,
-      stagger: 0.03,
-      duration: 0.4,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: titleRef.current,   // déclencheur = le h1
-        start: "top 80%",            // quand le haut du h1 arrive à 80% de la hauteur de l'écran
-        toggleActions: "play none none none", // joue une fois
+    gsap.fromTo(
+      words,
+      {
+        yPercent: 120,
+        opacity: 0,
       },
-    });
+      {
+        yPercent: 0,
+        opacity: 1,
+        stagger: 0.1,
+        duration: 0.6,
+        ease: "none",
+        scrollTrigger: {
+          trigger: titleRef.current,
+          start: "top 80%",
+          end: "bottom 80%",
+          scrub: 1,
+        },
+      }
+    );
   }, []);
 
   return (
     <h1
       ref={titleRef}
-      className="max-w-[800px] italic text-[35px] lg:text-[50px] font-poppins font-[600]"
+      className="max-w-[800px] italic text-[35px] lg:text-[50px] font-poppins font-[600] overflow-hidden"
     >
-      <span className="text-gray-700">{staticText}</span>
-      {animatedText.split("").map((char, index) => (
-        <span key={index} className="char inline-block">
-          {char === " " ? "\u00A0" : char}
+      {fullText.split(" ").map((word, index) => (
+        <span
+          key={index}
+          className="word inline-block  mr-[0.3em]"
+          style={{ lineHeight: "1.2" }}
+        >
+          <span className="inline-block">{word}</span>
         </span>
       ))}
     </h1>
