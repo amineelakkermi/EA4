@@ -1,6 +1,5 @@
 'use client';
 
-import React from 'react';
 
 const Technologies: React.FC = () => {
   const technologies = [
