@@ -6,50 +6,62 @@ import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Title from './Title'
 
+gsap.registerPlugin(ScrollTrigger)
+
 const Experience = () => {
-  const leftIconRef = useRef(null)
-  const rightIconRef = useRef(null)
+  const sectionRef = useRef<HTMLDivElement | null>(null)
+  const contentRef = useRef<HTMLDivElement | null>(null)
+  const rightIconRef = useRef<HTMLDivElement | null>(null)
 
+  // Animation de fade-out au scroll avec pin
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
+    if (!sectionRef.current || !contentRef.current || !rightIconRef.current) return
 
-    const left = leftIconRef.current
-    const right = rightIconRef.current
-
-    // LEFT ICON (monte très vite)
-    gsap.to(left, {
-      y: -100,              // distance plus grande = vitesse plus rapide
-      ease: "none",
-      scrollTrigger: {
-        trigger: "#experience",
-        start: "top 100%",    // réduit la zone -> plus rapide
-        end: "bottom 120%",
-        scrub: 1.5,          // smooth & rapide
+    const ctx = gsap.context(() => {
+      // ScrollTrigger commun pour le pin
+      const scrollTriggerConfig = {
+        trigger: sectionRef.current,
+        start: 'top top',
+        end: '+=100%',
+        scrub: 1,
+        pin: true,
+        anticipatePin: 1,
+        // markers: true, // Décommenter pour debug
       }
+
+      // Animation du contenu principal (Title)
+      gsap.to(contentRef.current, {
+        opacity: 0,
+        y: -50,
+        ease: 'power2.inOut',
+        scrollTrigger: scrollTriggerConfig
+      })
+
+      // Animation de l'icône droite
+      gsap.to(rightIconRef.current, {
+        opacity: 0,
+        y: 30,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: '+=100%',
+          scrub: 1,
+        }
+      })
     })
 
-    // RIGHT ICON (descend très vite)
-    gsap.to(right, {
-      y: 100,
-      ease: "none",
-      scrollTrigger: {
-        trigger: "#experience",
-        start: "top 90%",
-        end: "bottom 130%",
-        scrub: 1.5,
-      }
-    })
-
-    ScrollTrigger.refresh()
+    return () => ctx.revert()
   }, [])
 
   return (
     <div
+      ref={sectionRef}
       id="experience"
       className={`w-full snap-start snap-always relative lg:px-12 px-6 pt-12 min-h-[500px] flex items-center`}
     >
       
-      <div className='max-w-6xl mx-auto'>
+      <div ref={contentRef} className='max-w-6xl mx-auto'>
        <Title />
       </div>
 

@@ -5,15 +5,23 @@ import Link from 'next/link'
 import HeroSahpes from './HeroSahpes'
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Technologies from './Technologies'
+
+gsap.registerPlugin(ScrollTrigger)
 
 export default function Hero() {
   const titleRef = useRef<HTMLHeadingElement | null>(null)
   const textRef = useRef<HTMLDivElement | null>(null)
+  const sectionRef = useRef<HTMLElement | null>(null)
+  const contentRef = useRef<HTMLDivElement | null>(null)
+  const shapesRef = useRef<HTMLDivElement | null>(null)
+  const scrollIndicatorRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     if (!titleRef.current || !textRef.current) return
 
+    // Animation d'entrée
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
     tl.fromTo(
@@ -29,19 +37,76 @@ export default function Hero() {
       )
   }, [])
 
+  // Animation de fade-out au scroll avec pin sur tous les éléments
+  useEffect(() => {
+    if (!sectionRef.current || !contentRef.current || !shapesRef.current || !scrollIndicatorRef.current) return
+
+    const ctx = gsap.context(() => {
+      // ScrollTrigger commun pour le pin
+      const scrollTriggerConfig = {
+        trigger: sectionRef.current,
+        start: 'top top',
+        end: '+=100%', // La section reste fixe pendant 100% de sa hauteur
+        scrub: 1,
+        pin: true, // Fixe la section pendant l'animation
+        anticipatePin: 1,
+        // markers: true, // Décommenter pour debug
+      }
+
+      // Animation du contenu principal (titre + paragraphe)
+      gsap.to(contentRef.current, {
+        opacity: 0,
+        y: -50,
+        ease: 'power2.inOut',
+        scrollTrigger: scrollTriggerConfig
+      })
+
+      // Animation des formes de fond
+      gsap.to(shapesRef.current, {
+        opacity: 0,
+        scale: 0.8,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: '+=100%',
+          scrub: 1,
+        }
+      })
+
+      // Animation de l'indicateur de scroll
+      gsap.to(scrollIndicatorRef.current, {
+        opacity: 0,
+        y: 30,
+        ease: 'power2.inOut',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: '+=100%',
+          scrub: 1,
+        }
+      })
+    })
+
+    return () => ctx.revert()
+  }, [])
+
   return (
     // 1) Section: centered vertically (grid) + 100svh pour mobile
     <section
+      ref={sectionRef}
       id="home"
       aria-labelledby="hero-title"
       className="relative isolate min-h-[90vh] grid place-items-center overflow-hidden"
     >
 
-    <HeroSahpes />
+    <div ref={shapesRef}>
+      <HeroSahpes />
+    </div>
 
 
       {/* 2) Wrapper: texte aligné à gauche */}
-      <div className="mx-auto max-w-6xl w-full pb-25 px-6">
+      <div ref={contentRef} className="mx-auto max-w-6xl w-full pb-25 px-6">
         <div className="max-w-6xl space-y-10">
           <h1 ref={titleRef} className={`max-w-[1100px] text-[45px] lg:text-[80px] font-kufam text-white font-[600]`}>
             UI <span className='text-yellow'>DESIGNER</span>
@@ -70,7 +135,7 @@ export default function Hero() {
       </div>
 
       {/* Scroll Down Indicator */}
-      <div className="absolute bottom-8 right-8 md:bottom-36 md:right-12">
+      <div ref={scrollIndicatorRef} className="absolute bottom-8 right-8 md:bottom-36 md:right-12">
         <div className="relative w-24 h-24 md:w-28 md:h-28 animate-spin-slow">
           {/* Circular Text */}
           <svg viewBox="0 0 100 100" className="w-full h-full">

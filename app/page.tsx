@@ -8,11 +8,12 @@ import Navbar from '@/components/Navbar'
 import Portfolio from '@/components/Portfolio'
 import Services from '@/components/Services'
 import Technologies from '@/components/Technologies'
-import React from 'react'
 
 const page = () => {
   return (
     <main>
+      {/* Défilement automatique - Activer avec Ctrl+Shift+A */}
+      
       <div className='bg snap-start snap-always'>
       <Navbar />
       <Hero />
