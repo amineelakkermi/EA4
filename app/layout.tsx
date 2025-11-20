@@ -60,7 +60,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Portfolio | Développeur Web Front-End & React - [Ton Nom]",
+    title: "Elakkermi Amine | Portfolio",
     description:
       "Portfolio de [Ton Nom], développeur web spécialisé en React, Next.js et Tailwind CSS.",
     creator: "@TonPseudoTwitter",
