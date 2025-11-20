@@ -79,6 +79,33 @@ html {
 }
 
 /* ============================= */
+/* 📜 Scrollbar personnalisée */
+/* ============================= */
+/* Pour Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7B1DFF;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #6a19e6;
+}
+
+/* Pour Firefox */
+* {
+  scrollbar-width: none;
+  scrollbar-color: #7B1DFF #f1f1f1;
+}
+
+/* ============================= */
 
 /* Marquee (infinite horizontal scroll) */
 .marquee { overflow: hidden; }

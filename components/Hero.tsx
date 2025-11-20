@@ -34,7 +34,7 @@ export default function Hero() {
     <section
       id="home"
       aria-labelledby="hero-title"
-      className="relative isolate min-h-[100svh] grid place-items-center overflow-hidden"
+      className="relative isolate min-h-[90vh] grid place-items-center overflow-hidden"
     >
 
     <HeroSahpes />
