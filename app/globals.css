@@ -101,7 +101,7 @@ html {
 
 /* Pour Firefox */
 * {
-  scrollbar-width: none;
+  scrollbar-width: thin;
   scrollbar-color: #7B1DFF #f1f1f1;
 }
 
