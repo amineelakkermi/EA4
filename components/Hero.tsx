@@ -9,10 +9,10 @@ import Technologies from './Technologies'
 
 export default function Hero() {
   const titleRef = useRef<HTMLHeadingElement | null>(null)
-  const buttonsRef = useRef<HTMLDivElement | null>(null)
+  const textRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    if (!titleRef.current || !buttonsRef.current) return
+    if (!titleRef.current || !textRef.current) return
 
     const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
@@ -22,7 +22,7 @@ export default function Hero() {
       { y: 0, opacity: 1, duration: 1 }
     )
       .fromTo(
-        buttonsRef.current,
+        textRef.current,
         { y: 30, opacity: 0 },
         { y: 0, opacity: 1, duration: 0.8 },
         '-=0.4'
@@ -49,7 +49,7 @@ export default function Hero() {
             CREATIVE WEB DEVELOPER
           </h1>
 
-          <p className={`${styles.paragraph} max-w-[650px] text-gray-200`}>
+          <p ref={textRef} className={`${styles.paragraph} max-w-[650px] text-gray-200`}>
           I’m a Web Developer specialized in creating fast and aesthetic web experiences using Next.js & TailwindCSS.
           </p>
 
