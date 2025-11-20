@@ -1,6 +1,5 @@
 
 import Contact from '@/components/Contact'
-import EmailScrolling from '@/components/EmailScrolling'
 import Experience from '@/components/Experience'
 import Feedbacks from '@/components/Feedbacks'
 import GetInTouch from '@/components/GetInTouch'
@@ -14,7 +13,7 @@ import React from 'react'
 const page = () => {
   return (
     <main>
-      <div className='bg'>
+      <div className='bg snap-start snap-always'>
       <Navbar />
       <Hero />
       </div>

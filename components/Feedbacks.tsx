@@ -31,7 +31,7 @@ export default function Feedbacks() {
   return (
     <section
       id="testimonials"
-      className={`${styles.padding} w-full flex items-center flex-col gap-10`}
+      className={`${styles.padding} snap-start snap-always w-full flex items-center flex-col gap-10`}
       aria-labelledby="feedbacks-title"
     >
       {/* Header */}

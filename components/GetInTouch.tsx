@@ -44,7 +44,7 @@ const GetInTouch = () => {
   return (
     <section
       id="getInTouch"
-      className="relative my-16 rounded-[15px] min-h-[600px] w-full flex justify-center items-center bg text-white px-6 md:px-12"
+      className="snap-start snap-always relative my-16 rounded-[15px] min-h-[600px] w-full flex justify-center items-center bg text-white px-6 md:px-12"
     >
       <div className="max-w-6xl mx-auto text-center md:text-left">
         {/* TITLE */}

@@ -66,7 +66,7 @@ export default function Contact(): JSX.Element {
   return (
     <section
     id='contact'
-    className={`${styles.paddingY} w-full`}>
+    className={`${styles.paddingY} snap-start snap-always w-full`}>
       <div className="mx-auto w-[92%] sm:w-[88%] max-w-5xl">
         {/* Title */}
         <header className="mb-8 text-center">

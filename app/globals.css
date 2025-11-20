@@ -64,6 +64,21 @@ html, body {
 }
 
 /* ============================= */
+/* 📜 Scroll Snap Configuration */
+/* ============================= */
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+/* Optimisation pour mobile */
+@media (max-width: 768px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+}
+
+/* ============================= */
 
 /* Marquee (infinite horizontal scroll) */
 .marquee { overflow: hidden; }

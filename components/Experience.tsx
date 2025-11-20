@@ -46,7 +46,7 @@ const Experience = () => {
   return (
     <div
       id="experience"
-      className={`w-full  relative lg:px-12 px-6 pt-12 min-h-[500px] flex items-center`}
+      className={`w-full snap-start snap-always relative lg:px-12 px-6 pt-12 min-h-[500px] flex items-center`}
     >
       
       <div className='max-w-6xl mx-auto'>
@@ -55,18 +55,11 @@ const Experience = () => {
 
 
 
-      {/* LEFT ICON */}
-      <div ref={leftIconRef} className="absolute left-[5%] lg:left-[10%] bottom-[-20%] md:bottom-[0%]">
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-[45px] md:w-[80px] h-[45px] md:h-[80px]" fill="none" viewBox="0 0 256 256">
-          <path d="M 228 0 C 172.772 0 128 44.772 128 100 L 128 0 L 0 0 L 0 28 C 0 83.228 44.772 128 100 128 L 0 128 L 0 256 L 28 256 C 83.228 256 128 211.228 128 156 L 128 256 L 256 256 L 256 228 C 256 172.772 211.228 128 156 128 L 256 128 L 256 0 Z" fill="#96f45c" />
-        </svg>
-      </div>
+    
 
       {/* RIGHT ICON */}
       <div ref={rightIconRef} className="absolute right-[5%] lg:right-[10%] top-[-5%] md:top-[0%]">
-        <svg xmlns="http://www.w3.org/2000/svg" className="w-[45px] md:w-[80px] h-[45px] md:h-[80px]" fill="none" viewBox="0 0 256 256">
-          <path d="M 228 0 C 172.772 0 128 44.772 128 100 L 128 0 L 0 0 L 0 28 C 0 83.228 44.772 128 100 128 L 0 128 L 0 256 L 28 256 C 83.228 256 128 211.228 128 156 L 128 256 L 256 256 L 256 228 C 256 172.772 211.228 128 156 128 L 256 128 L 256 0 Z" fill="#96f45c" />
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" className="w-[45px] md:w-[80px] h-[45px] md:h-[80px]" fill="none" viewBox="0 0 256 256" ><path d="M 92 72 C 142.81 72 184 113.19 184 164 C 184 214.81 142.81 256 92 256 C 41.19 256 0 214.81 0 164 C 0 113.19 41.19 72 92 72 Z M 256 0 L 256 256 L 184 256 L 184 72 L 0 72 L 0 0 Z" fill="#96f45c"></path></svg>
       </div>
 
     </div>

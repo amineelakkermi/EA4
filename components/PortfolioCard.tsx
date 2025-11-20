@@ -14,7 +14,7 @@ interface Props{
 
 export default function PortfolioCard({ title , image, slug, href, tags }: Props): JSX.Element {
   return (
-    <article className="rounded-2xl p-5 md:p-6 ring-1 ring-black/10 shadow-sm">
+    <article className="rounded-2xl p-5 md:p-6 ring-1 ring-black/10 shadow-md">
       {/* Screenshot */}
       <div className="relative overflow-hidden rounded-xl bg-neutral-50 aspect-[16/11]">
         <Image
