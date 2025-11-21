@@ -18,32 +18,53 @@ const Services = () => {
     if (!servicesSectionRef.current || !servicesContentRef.current || !titleRef.current) return;
 
     const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray<HTMLElement>('.service-card');
+      
+      // État initial: toutes les cartes cachées sauf la première
+      gsap.set(cards, { opacity: 0, y: 50, scale: 0.9 });
+      if (cards[0]) gsap.set(cards[0], { opacity: 1, y: 0, scale: 1 });
 
-      // نضمن أن المحتوى ظاهر قبل الـ Scroll
-      gsap.set(servicesContentRef.current, {
-        opacity: 1,
-        y: 0,
-      });
-
-      // Scroll Animation - effet unique: rotation + mouvement latéral
+      // Timeline principale avec pin
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: servicesSectionRef.current,
           start: 'top top',
-          end: '+=100%',
+          end: '+=400%', // 4 sections: carte1 visible, carte2 apparaît, carte3 apparaît, disparition
           scrub: 1.5,
           pin: true,
           anticipatePin: 1,
         }
       });
 
+      // Phase 1: Carte 1 déjà visible (0-25%)
+      // Phase 2: Carte 2 apparaît (25-50%)
+      if (cards[1]) {
+        tl.to(cards[1], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          ease: "power2.out",
+        }, 0.25);
+      }
+
+      // Phase 3: Carte 3 apparaît (50-75%)
+      if (cards[2]) {
+        tl.to(cards[2], {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          ease: "power2.out",
+        }, 0.5);
+      }
+
+      // Phase 4: Disparition de tout (75-100%)
       // Titre va vers la droite
       tl.to(titleRef.current, {
         opacity: 0,
         x: 500,
         scale: 0.8,
         ease: "power2.inOut",
-      }, 0);
+      }, 0.75);
 
       // Contenu va vers la gauche avec rotation
       tl.to(servicesContentRef.current, {
@@ -52,7 +73,7 @@ const Services = () => {
         rotateY: 45,
         scale: 0.8,
         ease: "power2.inOut",
-      }, 0);
+      }, 0.75);
       
     });
 
@@ -71,7 +92,9 @@ const Services = () => {
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesCardData.map((service, index) => (
-            <ServicesCard key={service.id} service={service} index={index} />
+            <div key={service.id} className="service-card">
+              <ServicesCard service={service} index={index} />
+            </div>
           ))}
         </div>
       </div>
