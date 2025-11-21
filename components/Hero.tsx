@@ -79,15 +79,14 @@ export default function Hero() {
       className="relative isolate min-h-[100vh] grid place-items-center overflow-hidden"
     >
       {/* محتوى رئيسي */}
-      <div ref={contentRef} className="mx-auto max-w-6xl w-full py-25 px-6">
-        <div className="max-w-6xl space-y-10">
+      <div ref={contentRef} className="mx-auto max-w-6xl w-full pt-20 px-6">
+        <div className="max-w-6xl space-y-5">
           <h1
             ref={titleRef}
-            className="max-w-[1100px] text-[45px] lg:text-[80px] font-kufam text-white font-[600]"
+            className="max-w-[1100px] text-[70px] sm:text-[80px] md:text-[100px] lg:text-[150px] lg:leading-[170px] font-kufam text-white font-[700]"
           >
-            UI <span className='text-yellow'>DESIGNER</span>
-            <br />
-            CREATIVE WEB DEVELOPER
+           FRONTEND <br />
+           <span className='text-yellow'>DEVELOPER</span>
           </h1>
 
           <p
