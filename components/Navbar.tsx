@@ -81,7 +81,7 @@ export default function Navbar(): JSX.Element {
       {/* Logo */}
       <div id="main-navbar" className={`${styles.padding} fixed top-0 left-0 right-0 z-[1002] max-w-6xl mx-auto flex justify-between items-center`}>
         <Link href="/" className="z-[1000]" aria-label="Go to homepage">
-          <Image src={logo2} width={70} height={70} alt="logo" />
+          <Image src={logo2} width={70} height={70} alt="logo" className={`${isOpen ? "hidden" : "block"}`} />
         </Link>
 
         {/* Hamburger Button */}
@@ -134,16 +134,20 @@ export default function Navbar(): JSX.Element {
       {isOpen && (
         <div
           ref={mobileMenuRef}
-          className="fixed inset-0 z-[999] bg-slate-900/95 backdrop-blur-md flex items-center justify-center"
+          className="fixed inset-0 z-[999] bg-[#1a2332] flex items-start justify-start"
         >
-          <nav aria-label="Main navigation">
-            <ul ref={mobileListRef} className="flex flex-col items-center gap-8">
-              {navItems.map((item) => (
-                <li key={item.id}>
+          <nav aria-label="Main navigation" className="w-full px-8 md:px-16 pt-32">
+            <ul ref={mobileListRef} className="flex flex-col gap-4">
+              {navItems.map((item, index) => (
+                <li key={item.id} className="flex items-start gap-4 group">
+                  <span className="text-sm md:text-base font-light text-white/60 mt-2 min-w-[2rem]">
+                    0{index + 1}
+                  </span>
                   <Link
                     href={item.href}
-                    className="text-3xl md:text-4xl font-medium text-white hover:text-blue-400 transition-colors"
+                    className="text-5xl md:text-7xl lg:text-8xl font-black uppercase text-white hover:text-white/70 transition-colors leading-none tracking-tight"
                     onClick={() => setIsOpen(false)}
+                    style={{ fontFamily: 'system-ui, -apple-system, sans-serif' }}
                   >
                     {item.name}
                   </Link>
