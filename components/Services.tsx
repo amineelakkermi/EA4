@@ -11,9 +11,11 @@ gsap.registerPlugin(ScrollTrigger);
 const Services = () => {
   const servicesSectionRef = useRef(null);
   const servicesContentRef = useRef(null);
+  const titleRef = useRef(null);
+
 
   useEffect(() => {
-    if (!servicesSectionRef.current || !servicesContentRef.current) return;
+    if (!servicesSectionRef.current || !servicesContentRef.current || !titleRef.current) return;
 
     const ctx = gsap.context(() => {
 
@@ -24,7 +26,7 @@ const Services = () => {
       });
 
       // Scroll Animation - effet unique: rotation + mouvement latéral
-      gsap.timeline({
+      const tl = gsap.timeline({
         scrollTrigger: {
           trigger: servicesSectionRef.current,
           start: 'top top',
@@ -33,15 +35,25 @@ const Services = () => {
           pin: true,
           anticipatePin: 1,
         }
-      })
-      .to(servicesContentRef.current, {
+      });
+
+      // Titre va vers la droite
+      tl.to(titleRef.current, {
+        opacity: 0,
+        x: 500,
+        scale: 0.8,
+        ease: "power2.inOut",
+      }, 0);
+
+      // Contenu va vers la gauche avec rotation
+      tl.to(servicesContentRef.current, {
         opacity: 0,
         x: -100,
         rotateY: 45,
         scale: 0.8,
         ease: "power2.inOut",
-      });
-
+      }, 0);
+      
     });
 
     return () => ctx.revert();
@@ -53,8 +65,9 @@ const Services = () => {
       id="services"
       className={`${styles.padding} relative min-h-[100svh] w-full flex flex-col gap-10 justify-center items-center`}
     >
+      <h1 ref={titleRef} className={`${styles.title}`}>I Specialize in ⚡ Rank of Skills</h1>
+
       <div ref={servicesContentRef} className="flex flex-col gap-5">
-        <h1 className={`${styles.title}`}>I Specialize in ⚡ Rank of Skills</h1>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {servicesCardData.map((service, index) => (

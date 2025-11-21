@@ -15,7 +15,7 @@ const Experience = () => {
 
   // Animation de fade-out au scroll avec pin
   useEffect(() => {
-    if (!sectionRef.current || !contentRef.current) return
+    if (!sectionRef.current || !contentRef.current || !shapeRef.current) return
 
     const ctx = gsap.context(() => {
       // Réinitialiser la position de départ
