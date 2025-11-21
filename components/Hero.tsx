@@ -83,7 +83,7 @@ export default function Hero() {
         <div className="max-w-6xl space-y-5">
           <h1
             ref={titleRef}
-            className="max-w-[1100px] text-[70px] sm:text-[80px] md:text-[100px] lg:text-[150px] lg:leading-[170px] font-kufam text-white font-[700]"
+            className="max-w-[1100px] text-[50px] xs:text-[65px] sm:text-[80px] md:text-[100px] lg:text-[150px] lg:leading-[170px] font-kufam text-white font-[700]"
           >
            FRONTEND <br />
            <span className='text-yellow'>DEVELOPER</span>
