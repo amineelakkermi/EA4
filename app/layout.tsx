@@ -25,7 +25,7 @@ export const kufam = Kufam({
 export const metadata: Metadata = {
   title: "Portfolio | Développeur Web Front-End & React - EA4",
   description:
-    "Découvrez le portfolio de [Ton Nom], développeur web spécialisé en React, Next.js et Tailwind CSS. Création de sites modernes, rapides et optimisés pour le SEO.",
+    "Découvrez le portfolio de [EA4], développeur web spécialisé en React, Next.js et Tailwind CSS. Création de sites modernes, rapides et optimisés pour le SEO.",
   keywords: [
     "développeur web",
     "frontend developer",
@@ -45,16 +45,9 @@ export const metadata: Metadata = {
     title: "Portfolio | Développeur Web Front-End & React - [EA4]",
     description:
       "Développeur web passionné par la création d’expériences numériques modernes et performantes avec React et Next.js.",
-    url: "https://ton-site.vercel.app",
+    url: "https://ea-4.vercel.app",
     siteName: "Portfolio de [EA4]",
-    images: [
-      {
-        url: "https://ton-site.vercel.app/images/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Aperçu du portfolio de [EA4]",
-      },
-    ],
+   
     locale: "fr_FR",
     type: "website",
   },
@@ -64,6 +57,9 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
+  },
+  verification: {
+    google: "googleaf65c73324f04f9f",
   },
 };
 
