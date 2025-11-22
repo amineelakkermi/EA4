@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Elakkermi Amine | Portfolio",
     description:
-      "Portfolio de [Ton Nom], développeur web spécialisé en React, Next.js et Tailwind CSS.",
+      "EA4, développeur web spécialisé en React, Next.js et Tailwind CSS.",
     creator: "@TonPseudoTwitter",
     images: ["https://ton-site.vercel.app/images/og-image.jpg"],
   },
