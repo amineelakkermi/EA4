@@ -23,7 +23,7 @@ export const kufam = Kufam({
 
 
 export const metadata: Metadata = {
-  title: "Portfolio | Développeur Web Front-End & React - [Ton Nom]",
+  title: "Portfolio | Développeur Web Front-End & React - EA4",
   description:
     "Découvrez le portfolio de [Ton Nom], développeur web spécialisé en React, Next.js et Tailwind CSS. Création de sites modernes, rapides et optimisés pour le SEO.",
   keywords: [
@@ -52,20 +52,14 @@ export const metadata: Metadata = {
         url: "https://ton-site.vercel.app/images/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Aperçu du portfolio de [Ton Nom]",
+        alt: "Aperçu du portfolio de [EA4]",
       },
     ],
     locale: "fr_FR",
     type: "website",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Elakkermi Amine | Portfolio",
-    description:
-      "EA4, développeur web spécialisé en React, Next.js et Tailwind CSS.",
-    creator: "@TonPseudoTwitter",
-    images: ["https://ton-site.vercel.app/images/og-image.jpg"],
-  },
+ 
+  
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
