@@ -48,6 +48,7 @@ export default function PortfolioCard({ title , image, slug, href, tags }: Props
           <Link
             href={href}
             aria-label={`Open ${title}`}
+            target='_blank'
             className="inline-flex items-center justify-center w-10 h-10 rounded-full ring-1 ring-black/30 hover:bg-black/[0.04] transition"
           >
             <svg
