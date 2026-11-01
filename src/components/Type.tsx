@@ -2,6 +2,7 @@ import React from 'react';
 import {useCurrentFrame, useVideoConfig, interpolate} from 'remotion';
 import {colors, fonts} from '../theme';
 import {sp, springs, clamp} from '../anim';
+import {useLang} from '../i18n';
 
 type Props = {
   text: string;
@@ -9,7 +10,7 @@ type Props = {
   size?: number;
   weight?: number;
   color?: string;
-  align?: 'right' | 'center' | 'left';
+  align?: 'start' | 'right' | 'center' | 'left';
   stagger?: number;
   lineHeight?: number;
   style?: React.CSSProperties;
@@ -29,20 +30,21 @@ export const Headline: React.FC<Props> = ({
   size = 88,
   weight = 700,
   color = colors.navy,
-  align = 'right',
+  align = 'start',
   stagger = 3,
   lineHeight = 1.28,
   style,
   highlight = [],
   accent = colors.blue,
   exit,
-  dir = 'rtl',
+  dir: dirProp,
 }) => {
+  const {dir: ctxDir} = useLang();
+  const dir = dirProp ?? ctxDir;
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const words = text.split(' ');
-  const exitP =
-    exit === undefined ? 0 : interpolate(frame, [exit, exit + 14], [0, 1], {...clamp});
+  const exitP = exit === undefined ? 0 : interpolate(frame, [exit, exit + 14], [0, 1], {...clamp});
   return (
     <div
       dir={dir}
@@ -65,7 +67,7 @@ export const Headline: React.FC<Props> = ({
     >
       {words.map((w, i) => {
         const p = sp(frame, fps, delay + i * stagger, springs.smooth);
-        const isHi = highlight.includes(w.replace(/[،؟!.]/g, ''));
+        const isHi = highlight.includes(w.replace(/[،؟!.?,:;\u202F]/g, ''));
         return (
           <span
             key={i}
@@ -100,19 +102,19 @@ export const Body: React.FC<{
   delay?: number;
   size?: number;
   color?: string;
-  align?: 'right' | 'center' | 'left';
+  align?: 'start' | 'right' | 'center' | 'left';
   weight?: number;
   style?: React.CSSProperties;
   exit?: number;
-}> = ({text, delay = 0, size = 44, color = colors.muted, align = 'right', weight = 500, style, exit}) => {
+}> = ({text, delay = 0, size = 44, color = colors.muted, align = 'start', weight = 500, style, exit}) => {
+  const {dir} = useLang();
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const p = sp(frame, fps, delay, springs.smooth);
-  const exitP =
-    exit === undefined ? 0 : interpolate(frame, [exit, exit + 14], [0, 1], {...clamp});
+  const exitP = exit === undefined ? 0 : interpolate(frame, [exit, exit + 14], [0, 1], {...clamp});
   return (
     <div
-      dir="rtl"
+      dir={dir}
       style={{
         fontFamily: fonts.arabic,
         fontSize: size,
@@ -131,11 +133,17 @@ export const Body: React.FC<{
 };
 
 /** Big outlined step number with a solid gold fill that slides in */
-export const StepNumber: React.FC<{n: string; delay?: number; size?: number}> = ({n, delay = 0, size = 220}) => {
+export const StepNumber: React.FC<{
+  n: string;
+  delay?: number;
+  size?: number;
+}> = ({n, delay = 0, size = 220}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const p = sp(frame, fps, delay, springs.snappy);
-  const fill = interpolate(frame, [delay + 8, delay + 26], [0, 100], {...clamp});
+  const fill = interpolate(frame, [delay + 8, delay + 26], [0, 100], {
+    ...clamp,
+  });
   return (
     <div
       style={{
@@ -191,12 +199,13 @@ export const Pill: React.FC<{
   size?: number;
   style?: React.CSSProperties;
 }> = ({text, delay = 0, color = colors.blue, bg = colors.blueSoft, size = 30, style}) => {
+  const {dir} = useLang();
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const p = sp(frame, fps, delay, springs.snappy);
   return (
     <div
-      dir="rtl"
+      dir={dir}
       style={{
         display: 'inline-flex',
         alignItems: 'center',

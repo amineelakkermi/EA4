@@ -5,6 +5,7 @@ import {FPS, W, H} from './theme';
 
 export const Root: React.FC = () => (
   <>
-    <Composition id="EA4SeoReel" component={SeoReel} durationInFrames={TOTAL} fps={FPS} width={W} height={H} />
+    <Composition id="EA4SeoReel" component={SeoReel} durationInFrames={TOTAL} fps={FPS} width={W} height={H} defaultProps={{lang: 'ar' as const}} />
+    <Composition id="EA4SeoReelFR" component={SeoReel} durationInFrames={TOTAL} fps={FPS} width={W} height={H} defaultProps={{lang: 'fr' as const}} />
   </>
 );

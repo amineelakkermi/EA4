@@ -5,6 +5,7 @@ import {Camera} from '../components/Camera';
 import {Headline, Body} from '../components/Type';
 import {colors, fonts, SAFE, shadow} from '../theme';
 import {clamp, ease, sp, springs} from '../anim';
+import {useLang} from '../i18n';
 
 export const LOGO_AT = 96;
 
@@ -12,8 +13,12 @@ export const LOGO_AT = 96;
 const PatienceChart: React.FC<{start: number; width: number}> = ({start, width}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const {t, dir, k} = useLang();
   const p = sp(frame, fps, start, springs.smooth);
-  const draw = interpolate(frame, [start + 10, start + 70], [0, 1], {...clamp, easing: ease.inOut});
+  const draw = interpolate(frame, [start + 10, start + 70], [0, 1], {
+    ...clamp,
+    easing: ease.inOut,
+  });
   const w = width - 68;
   const h = 300;
   const pts = Array.from({length: 7}, (_, i) => {
@@ -24,10 +29,10 @@ const PatienceChart: React.FC<{start: number; width: number}> = ({start, width})
   });
   const d = pts.map(([x, y], i) => `${i === 0 ? 'M' : 'L'}${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
   const L = 1400;
-  const months = ['الشهر 1', '2', '3', '4', '5', '6'];
+  const months = [t.fMonth1, '2', '3', '4', '5', '6'];
   return (
     <div
-      dir="rtl"
+      dir={dir}
       style={{
         width,
         borderRadius: 30,
@@ -39,11 +44,36 @@ const PatienceChart: React.FC<{start: number; width: number}> = ({start, width})
         transform: `translateY(${(1 - p) * 70}px)`,
       }}
     >
-      <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-        <div style={{fontSize: 24, fontWeight: 700, color: colors.navy}}>الظهور يتحسّن تدريجيًا مع الاستمرار</div>
-        <div style={{fontSize: 18, fontWeight: 600, color: colors.gold, background: colors.goldSoft, padding: '6px 14px', borderRadius: 99}}>بدون ضمان للمركز الأول</div>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <div style={{fontSize: 24 * k, fontWeight: 700, color: colors.navy}}>{t.fChartTitle}</div>
+        <div
+          style={{
+            fontSize: 18,
+            fontWeight: 600,
+            color: colors.gold,
+            background: colors.goldSoft,
+            padding: '6px 14px',
+            borderRadius: 99,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {t.fBadge}
+        </div>
       </div>
-      <div style={{position: 'relative', height: h, marginTop: 16, direction: 'ltr'}}>
+      <div
+        style={{
+          position: 'relative',
+          height: h,
+          marginTop: 16,
+          direction: 'ltr',
+        }}
+      >
         <svg width={w} height={h} style={{position: 'absolute', inset: 0, overflow: 'visible'}}>
           {[0.25, 0.5, 0.75, 1].map((g) => (
             <line key={g} x1={0} x2={w} y1={h - 30 - g * (h - 80)} y2={h - 30 - g * (h - 80)} stroke={colors.line} strokeDasharray="4 8" />
@@ -58,7 +88,19 @@ const PatienceChart: React.FC<{start: number; width: number}> = ({start, width})
           <path d={d} fill="none" stroke={colors.blue} strokeWidth={5} strokeLinecap="round" strokeLinejoin="round" strokeDasharray={`${L * draw} ${L}`} />
           {draw > 0.98 && <circle cx={pts[6][0]} cy={pts[6][1]} r={10} fill={colors.gold} stroke="#fff" strokeWidth={4} />}
         </svg>
-        <div style={{position: 'absolute', left: 0, right: 0, bottom: -4, display: 'flex', justifyContent: 'space-between', fontSize: 17, color: colors.muted, fontFamily: fonts.arabic}}>
+        <div
+          style={{
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            bottom: -4,
+            display: 'flex',
+            justifyContent: 'space-between',
+            fontSize: 17,
+            color: colors.muted,
+            fontFamily: fonts.arabic,
+          }}
+        >
           {months.map((m) => (
             <div key={m}>{m}</div>
           ))}
@@ -71,29 +113,69 @@ const PatienceChart: React.FC<{start: number; width: number}> = ({start, width})
 export const Scene06Final: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const leave = interpolate(frame, [LOGO_AT - 14, LOGO_AT + 6], [0, 1], {...clamp, easing: ease.in});
-  const logoReveal = interpolate(frame, [LOGO_AT + 14, LOGO_AT + 48], [0, 1], {...clamp, easing: ease.inOut});
+  const {t, k, lang} = useLang();
+  const leave = interpolate(frame, [LOGO_AT - 14, LOGO_AT + 6], [0, 1], {
+    ...clamp,
+    easing: ease.in,
+  });
+  const logoReveal = interpolate(frame, [LOGO_AT + 14, LOGO_AT + 48], [0, 1], {
+    ...clamp,
+    easing: ease.inOut,
+  });
   const logoRise = sp(frame, fps, LOGO_AT + 14, springs.gentle);
   const url = sp(frame, fps, LOGO_AT + 58, springs.smooth);
-  const lines = interpolate(frame, [LOGO_AT + 40, LOGO_AT + 80], [0, 1], {...clamp, easing: ease.inOut});
+  const lines = interpolate(frame, [LOGO_AT + 40, LOGO_AT + 80], [0, 1], {
+    ...clamp,
+    easing: ease.inOut,
+  });
   const logoW = 760;
   const logoH = logoW * (574 / 790);
   return (
     <Stage>
-      <Camera keys={[{frame: 0, scale: 1.0}, {frame: LOGO_AT, scale: 1.0}, {frame: 187, scale: 1.03}]}>
+      <Camera
+        keys={[
+          {frame: 0, scale: 1.0},
+          {frame: LOGO_AT, scale: 1.0},
+          {frame: 187, scale: 1.03},
+        ]}
+      >
         {/* Part A: honest reminder */}
-        <div style={{position: 'absolute', top: SAFE.top, left: SAFE.left, right: 1080 - SAFE.right, opacity: 1 - leave, transform: `translateY(${-leave * 60}px)`}}>
-          <Headline text="تذكّر: تحسين SEO يحتاج وقت واستمرار،" delay={4} size={66} highlight={['SEO']} accent={colors.blue} />
-          <Headline text="وما فيه ضمان للظهور في المركز الأول." delay={22} size={58} color={colors.navySoft} style={{marginTop: 12}} />
+        <div
+          style={{
+            position: 'absolute',
+            top: SAFE.top,
+            left: SAFE.left,
+            right: 1080 - SAFE.right,
+            opacity: 1 - leave,
+            transform: `translateY(${-leave * 60}px)`,
+          }}
+        >
+          <Headline text={t.f1} delay={4} size={66 * k} highlight={[t.fHi]} accent={colors.blue} />
+          <Headline text={t.f2} delay={22} size={58 * k} color={colors.navySoft} style={{marginTop: 12}} />
         </div>
-        <div style={{position: 'absolute', top: 760, left: 90, opacity: 1 - leave, transform: `translateY(${leave * 120}px) scale(${1 - leave * 0.06})`}}>
+        <div
+          style={{
+            position: 'absolute',
+            top: 760,
+            left: 90,
+            opacity: 1 - leave,
+            transform: `translateY(${leave * 120}px) scale(${1 - leave * 0.06})`,
+          }}
+        >
           <PatienceChart start={26} width={900} />
         </div>
 
         {/* Part B: brand reveal */}
         <AbsoluteFill style={{alignItems: 'center', pointerEvents: 'none'}}>
-          <div style={{position: 'absolute', top: 400, left: SAFE.left, right: SAFE.left}}>
-            <Headline text="خلّ حضورك الرقمي يعكس احترافك." delay={LOGO_AT + 2} size={64} align="center" />
+          <div
+            style={{
+              position: 'absolute',
+              top: lang === 'fr' ? 340 : 400,
+              left: SAFE.left,
+              right: SAFE.left,
+            }}
+          >
+            <Headline text={t.fReveal} delay={LOGO_AT + 2} size={64 * k * k} align="center" />
           </div>
           {[-1, 1].map((side) => (
             <div

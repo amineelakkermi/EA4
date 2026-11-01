@@ -8,11 +8,16 @@ import {BrowserFrame} from '../components/Devices';
 import {SearchPage} from '../components/ui/SearchPage';
 import {SAFE, colors} from '../theme';
 import {clamp, ease} from '../anim';
+import {useLang} from '../i18n';
 
 export const Scene01Hook: React.FC = () => {
   const frame = useCurrentFrame();
+  const {t, k} = useLang();
   // dramatic push-in once the ghost slot appears
-  const punch = interpolate(frame, [70, 100], [0, 1], {...clamp, easing: ease.inOut});
+  const punch = interpolate(frame, [70, 100], [0, 1], {
+    ...clamp,
+    easing: ease.inOut,
+  });
   return (
     <Stage>
       <Camera
@@ -22,18 +27,18 @@ export const Scene01Hook: React.FC = () => {
           {frame: 127, scale: 1.1, y: -60, rotX: 0},
         ]}
       >
-        <div style={{position: 'absolute', top: SAFE.top - 20, left: SAFE.left, right: 1080 - SAFE.right}}>
-          <Headline text="عندك موقع إلكتروني،" delay={2} size={78} />
+        <div
+          style={{
+            position: 'absolute',
+            top: SAFE.top - 20,
+            left: SAFE.left,
+            right: 1080 - SAFE.right,
+          }}
+        >
+          <Headline text={t.hook1} delay={2} size={78 * k} />
           <div style={{height: 14}} />
-          <Headline
-            text="لكن ما يطلع في نتائج قوقل؟"
-            delay={14}
-            size={70}
-            color={colors.navySoft}
-            highlight={['قوقل']}
-            accent={colors.blue}
-          />
-          <Body text="خلّني أوضح لك وش ممكن يكون السبب." delay={84} size={42} style={{marginTop: 22}} />
+          <Headline text={t.hook2} delay={14} size={70 * k} color={colors.navySoft} highlight={[t.hookHi]} accent={colors.blue} />
+          <Body text={t.hook3} delay={84} size={42 * k} style={{marginTop: 22}} />
         </div>
         <AbsoluteFill style={{perspective: 2000}}>
           <div
@@ -46,8 +51,8 @@ export const Scene01Hook: React.FC = () => {
             }}
           >
             <Card delay={6} width={880} radius={34} elevation="float">
-              <BrowserFrame url="google.com/search?q=تصميم+مواقع+الرياض">
-                <SearchPage typeStart={18} query="تصميم مواقع الرياض" resultsAt={50} ghostAt={74} width={880} />
+              <BrowserFrame url={t.hookUrl}>
+                <SearchPage typeStart={18} query={t.hookQuery} resultsAt={50} ghostAt={74} width={880} />
               </BrowserFrame>
             </Card>
           </div>

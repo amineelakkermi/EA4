@@ -4,6 +4,7 @@ import {colors, fonts, shadow} from '../../theme';
 import {sp, springs, clamp, ease} from '../../anim';
 import {SearchIcon, CheckIcon} from '../Icons';
 import {Typed, Line} from './Typed';
+import {useLang} from '../../i18n';
 
 /**
  * A real customer question is typed into a search bar. A keyword-stuffed
@@ -13,20 +14,38 @@ import {Typed, Line} from './Typed';
 export const QueryToArticle: React.FC<{start: number; width?: number}> = ({start, width = 900}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const s = width / 900;
-  const query = 'كم تكلفة تصميم موقع إلكتروني؟';
+  const {t, dir, k} = useLang();
+  const s = (width / 900) * k;
+  const query = t.qaQuery;
   const badAt = start + 40;
   const strikeAt = start + 62;
   const swapAt = start + 78;
   const bar = sp(frame, fps, start, springs.smooth);
   const bad = sp(frame, fps, badAt, springs.smooth);
-  const strike = interpolate(frame, [strikeAt, strikeAt + 12], [0, 1], {...clamp, easing: ease.inOut});
-  const badOut = interpolate(frame, [swapAt - 6, swapAt + 10], [0, 1], {...clamp, easing: ease.in});
+  const strike = interpolate(frame, [strikeAt, strikeAt + 12], [0, 1], {
+    ...clamp,
+    easing: ease.inOut,
+  });
+  const badOut = interpolate(frame, [swapAt - 6, swapAt + 10], [0, 1], {
+    ...clamp,
+    easing: ease.in,
+  });
   const art = sp(frame, fps, swapAt, springs.smooth);
-  const connector = interpolate(frame, [swapAt + 6, swapAt + 24], [0, 1], {...clamp, easing: ease.out});
-  const sections = ['وش العوامل اللي تحدد التكلفة؟', 'الفرق بين الموقع التعريفي والمتجر الإلكتروني', 'كيف تختار الباقة المناسبة لنشاطك؟'];
+  const connector = interpolate(frame, [swapAt + 6, swapAt + 24], [0, 1], {
+    ...clamp,
+    easing: ease.out,
+  });
+  const sections = t.qaSections;
   return (
-    <div dir="rtl" style={{width, position: 'relative', fontFamily: fonts.arabic, height: 820 * s}}>
+    <div
+      dir={dir}
+      style={{
+        width,
+        position: 'relative',
+        fontFamily: fonts.arabic,
+        height: (820 * s) / k,
+      }}
+    >
       {/* search bar */}
       <div
         style={{
@@ -44,11 +63,33 @@ export const QueryToArticle: React.FC<{start: number; width?: number}> = ({start
       >
         <SearchIcon size={32 * s} color={colors.blue} />
         <Typed text={query} start={start + 8} cps={0.9} size={30 * s} weight={600} color={colors.navy} />
-        <div style={{marginRight: 'auto', fontSize: 18 * s, color: colors.muted, background: colors.bg, padding: `${6 * s}px ${14 * s}px`, borderRadius: 99, whiteSpace: 'nowrap'}}>سؤال عميل حقيقي</div>
+        <div
+          style={{
+            marginInlineStart: 'auto',
+            fontSize: 18 * s,
+            color: colors.muted,
+            background: colors.bg,
+            padding: `${6 * s}px ${14 * s}px`,
+            borderRadius: 99,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          {t.qaBadge}
+        </div>
       </div>
 
       {/* gold connector */}
-      <div style={{position: 'absolute', right: 70 * s, top: 110 * s, width: 3, height: 60 * s * connector, background: colors.gold, borderRadius: 2}} />
+      <div
+        style={{
+          position: 'absolute',
+          insetInlineStart: 70 * s,
+          top: 110 * s,
+          width: 3,
+          height: 60 * s * connector,
+          background: colors.gold,
+          borderRadius: 2,
+        }}
+      />
 
       {/* keyword-stuffed snippet (struck out) */}
       <div
@@ -65,13 +106,44 @@ export const QueryToArticle: React.FC<{start: number; width?: number}> = ({start
           transform: `translateY(${(1 - bad) * 40 + badOut * 60}px) scale(${1 - badOut * 0.06})`,
         }}
       >
-        <div style={{display: 'flex', alignItems: 'center', gap: 12 * s, marginBottom: 14 * s}}>
-          <div style={{width: 12 * s, height: 12 * s, borderRadius: 99, background: colors.red}} />
-          <div style={{fontSize: 20 * s, fontWeight: 700, color: colors.red}}>تكرار كلمات بدون فايدة للقارئ</div>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 12 * s,
+            marginBottom: 14 * s,
+          }}
+        >
+          <div
+            style={{
+              width: 12 * s,
+              height: 12 * s,
+              borderRadius: 99,
+              background: colors.red,
+            }}
+          />
+          <div style={{fontSize: 20 * s, fontWeight: 700, color: colors.red}}>{t.qaBadTitle}</div>
         </div>
-        <div style={{position: 'relative', fontSize: 24 * s, lineHeight: 1.7, color: colors.muted}}>
-          تصميم مواقع، تصميم مواقع الرياض، أفضل تصميم مواقع، شركة تصميم مواقع، تصميم مواقع رخيص، تصميم مواقع…
-          <div style={{position: 'absolute', right: 0, top: '50%', height: 3, width: `${strike * 100}%`, background: colors.red, opacity: 0.85}} />
+        <div
+          style={{
+            position: 'relative',
+            fontSize: 24 * s,
+            lineHeight: 1.7,
+            color: colors.muted,
+          }}
+        >
+          {t.qaBadText}
+          <div
+            style={{
+              position: 'absolute',
+              insetInlineStart: 0,
+              top: '50%',
+              height: 3,
+              width: `${strike * 100}%`,
+              background: colors.red,
+              opacity: 0.85,
+            }}
+          />
         </div>
       </div>
 
@@ -90,28 +162,105 @@ export const QueryToArticle: React.FC<{start: number; width?: number}> = ({start
           transform: `translateY(${(1 - art) * 90}px)`,
         }}
       >
-        <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}>
-          <div style={{fontSize: 17 * s, color: colors.muted, fontFamily: fonts.latin, direction: 'ltr'}}>ea-4.vercel.app › blog</div>
-          <div style={{display: 'flex', alignItems: 'center', gap: 8 * s, fontSize: 18 * s, fontWeight: 700, color: colors.green, background: colors.greenSoft, padding: `${6 * s}px ${14 * s}px`, borderRadius: 99}}>
-            <CheckIcon size={18 * s} progress={art} /> يجاوب على سؤال العميل
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}
+        >
+          <div
+            style={{
+              fontSize: 17 * s,
+              color: colors.muted,
+              fontFamily: fonts.latin,
+              direction: 'ltr',
+            }}
+          >
+            ea-4.vercel.app › blog
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 8 * s,
+              fontSize: 18 * s,
+              fontWeight: 700,
+              color: colors.green,
+              background: colors.greenSoft,
+              padding: `${6 * s}px ${14 * s}px`,
+              borderRadius: 99,
+            }}
+          >
+            <CheckIcon size={18 * s} progress={art} /> {t.qaAnswers}
           </div>
         </div>
-        <div style={{fontSize: 31 * s, fontWeight: 700, color: colors.navy, marginTop: 18 * s, lineHeight: 1.4}}>
-          كم تكلفة تصميم موقع إلكتروني في السعودية؟
+        <div
+          style={{
+            fontSize: 31 * s,
+            fontWeight: 700,
+            color: colors.navy,
+            marginTop: 18 * s,
+            lineHeight: 1.4,
+          }}
+        >
+          {t.qaTitle}
         </div>
-        <div style={{display: 'flex', flexDirection: 'column', gap: 6 * s, marginTop: 12 * s}}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 6 * s,
+            marginTop: 12 * s,
+          }}
+        >
           <Line w="92%" h={10 * s} />
           <Line w="70%" h={10 * s} />
         </div>
         {sections.map((t, i) => {
           const p = sp(frame, fps, swapAt + 16 + i * 10, springs.smooth);
           return (
-            <div key={t} style={{marginTop: 22 * s, opacity: Math.min(1, p * 1.5), transform: `translateX(${(1 - p) * 24}px)`}}>
+            <div
+              key={t}
+              style={{
+                marginTop: 22 * s,
+                opacity: Math.min(1, p * 1.5),
+                transform: `translateX(${(1 - p) * 24}px)`,
+              }}
+            >
               <div style={{display: 'flex', alignItems: 'center', gap: 12 * s}}>
-                <div style={{fontFamily: fonts.latin, fontSize: 15 * s, fontWeight: 700, color: colors.gold, background: colors.goldSoft, padding: `${3 * s}px ${8 * s}px`, borderRadius: 8 * s, direction: 'ltr'}}>H2</div>
-                <div style={{fontSize: 23 * s, fontWeight: 700, color: colors.ink}}>{t}</div>
+                <div
+                  style={{
+                    fontFamily: fonts.latin,
+                    fontSize: 15 * s,
+                    fontWeight: 700,
+                    color: colors.gold,
+                    background: colors.goldSoft,
+                    padding: `${3 * s}px ${8 * s}px`,
+                    borderRadius: 8 * s,
+                    direction: 'ltr',
+                  }}
+                >
+                  H2
+                </div>
+                <div
+                  style={{
+                    fontSize: 23 * s,
+                    fontWeight: 700,
+                    color: colors.ink,
+                  }}
+                >
+                  {t}
+                </div>
               </div>
-              <div style={{display: 'flex', flexDirection: 'column', gap: 6 * s, marginTop: 10 * s}}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 6 * s,
+                  marginTop: 10 * s,
+                }}
+              >
                 <Line w={`${88 - i * 6}%`} h={9 * s} />
                 <Line w={`${60 + i * 8}%`} h={9 * s} color={i === 1 ? colors.blueSoft : colors.line} />
               </div>

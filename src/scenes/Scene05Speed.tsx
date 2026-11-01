@@ -8,6 +8,7 @@ import {TipHeader} from './TipHeader';
 import {colors, fonts} from '../theme';
 import {clamp, ease, sp, springs} from '../anim';
 import {BoltIcon} from '../components/Icons';
+import {useLang} from '../i18n';
 
 export const WIPE_AT = 64;
 
@@ -15,20 +16,52 @@ export const WIPE_AT = 64;
 export const Scene05Speed: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const {t, dir, k} = useLang();
   const enter = sp(frame, fps, 10, springs.smooth);
-  const wipe = interpolate(frame, [WIPE_AT, WIPE_AT + 26], [0, 1], {...clamp, easing: ease.inOut});
+  const wipe = interpolate(frame, [WIPE_AT, WIPE_AT + 26], [0, 1], {
+    ...clamp,
+    easing: ease.inOut,
+  });
   const lapW = 700;
   const lapH = lapW * 0.62 - lapW * 0.018 * 2.2;
   const phoneW = 250;
   const slowBar = interpolate(frame, [12, WIPE_AT], [0.04, 0.32], {...clamp});
-  const fastBar = interpolate(frame, [WIPE_AT + 4, WIPE_AT + 20], [0, 1], {...clamp, easing: ease.out});
+  const fastBar = interpolate(frame, [WIPE_AT + 4, WIPE_AT + 20], [0, 1], {
+    ...clamp,
+    easing: ease.out,
+  });
 
   const Devices: React.FC<{fast: boolean}> = ({fast}) => (
-    <div style={{position: 'absolute', top: 700, left: 80, width: 1000, height: 760}}>
-      <div style={{position: 'absolute', left: 0, top: 40, transform: 'rotateY(10deg) rotateX(3deg)', transformStyle: 'preserve-3d'}}>
+    <div
+      style={{
+        position: 'absolute',
+        top: 700,
+        left: 80,
+        width: 1000,
+        height: 760,
+      }}
+    >
+      <div
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 40,
+          transform: 'rotateY(10deg) rotateX(3deg)',
+          transformStyle: 'preserve-3d',
+        }}
+      >
         <Laptop width={lapW}>
           <BrowserFrame url="ea-4.vercel.app" barHeight={40}>
-            <div style={{position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: colors.line}}>
+            <div
+              style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 4,
+                background: colors.line,
+              }}
+            >
               <div
                 style={{
                   width: `${(fast ? fastBar : slowBar) * 100}%`,
@@ -41,7 +74,15 @@ export const Scene05Speed: React.FC = () => {
           </BrowserFrame>
         </Laptop>
       </div>
-      <div style={{position: 'absolute', left: 690, top: 200, transform: 'rotateY(-8deg) rotateX(2deg)', transformStyle: 'preserve-3d'}}>
+      <div
+        style={{
+          position: 'absolute',
+          left: 690,
+          top: 200,
+          transform: 'rotateY(-8deg) rotateX(2deg)',
+          transformStyle: 'preserve-3d',
+        }}
+      >
         <Phone width={phoneW}>
           <div style={{paddingTop: phoneW * 0.16}}>
             <SiteMockup width={phoneW - phoneW * 0.07} height={phoneW * 1.75} mobile loadedAt={fast ? WIPE_AT + 6 : Infinity} stagger={2} />
@@ -50,7 +91,7 @@ export const Scene05Speed: React.FC = () => {
       </div>
       {/* status badge */}
       <div
-        dir="rtl"
+        dir={dir}
         style={{
           position: 'absolute',
           left: 60,
@@ -59,7 +100,7 @@ export const Scene05Speed: React.FC = () => {
           alignItems: 'center',
           gap: 12,
           fontFamily: fonts.arabic,
-          fontSize: 30,
+          fontSize: 30 * k,
           fontWeight: 700,
           color: fast ? colors.green : colors.red,
           background: fast ? colors.greenSoft : colors.redSoft,
@@ -68,7 +109,9 @@ export const Scene05Speed: React.FC = () => {
           boxShadow: '0 14px 30px -14px rgba(11,27,58,0.25)',
         }}
       >
-        {fast ? <BoltIcon size={30} color={colors.green} /> : (
+        {fast ? (
+          <BoltIcon size={30} color={colors.green} />
+        ) : (
           <div
             style={{
               width: 24,
@@ -80,16 +123,28 @@ export const Scene05Speed: React.FC = () => {
             }}
           />
         )}
-        {fast ? 'سريع وجاهز للجوال' : 'بطيء… جارٍ التحميل'}
+        {fast ? t.spFast : t.spSlow}
       </div>
     </div>
   );
 
   return (
     <Stage>
-      <Camera keys={[{frame: 0, scale: 1.0}, {frame: WIPE_AT, scale: 1.02}, {frame: 164, scale: 1.08, y: -30}]}>
-        <TipHeader n="04" title="اهتم بسرعة الموقع، وتأكد إنه يشتغل بشكل ممتاز على الجوال." delay={4} titleSize={58} />
-        <AbsoluteFill style={{perspective: 2400, opacity: Math.min(1, enter * 1.5), transform: `translateY(${(1 - enter) * 80}px)`}}>
+      <Camera
+        keys={[
+          {frame: 0, scale: 1.0},
+          {frame: WIPE_AT, scale: 1.02},
+          {frame: 164, scale: 1.08, y: -30},
+        ]}
+      >
+        <TipHeader n="04" title={t.t4Title} delay={4} titleSize={58} />
+        <AbsoluteFill
+          style={{
+            perspective: 2400,
+            opacity: Math.min(1, enter * 1.5),
+            transform: `translateY(${(1 - enter) * 80}px)`,
+          }}
+        >
           <Devices fast={false} />
           <AbsoluteFill style={{clipPath: `inset(0 ${(1 - wipe) * 100}% 0 0)`}}>
             <Devices fast />

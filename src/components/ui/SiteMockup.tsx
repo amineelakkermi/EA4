@@ -4,6 +4,7 @@ import {useCurrentFrame, useVideoConfig, interpolate} from 'remotion';
 import {colors, fonts} from '../../theme';
 import {sp, springs, clamp, ease} from '../../anim';
 import {Line} from './Typed';
+import {useLang} from '../../i18n';
 
 /**
  * Stylised EA4 website in the navy / blue / gold palette.
@@ -20,7 +21,8 @@ export const SiteMockup: React.FC<{
 }> = ({width, height, mobile = false, loadedAt = 0, stagger = 3, skeleton = true}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const s = width / (mobile ? 360 : 900);
+  const {t, dir, k} = useLang();
+  const s = (width / (mobile ? 360 : 900)) * k;
   const loaded = (d = 0) => (Number.isFinite(loadedAt) ? sp(frame, fps, loadedAt + d, springs.smooth) : 0);
   const hero = loaded(0);
   const block = (i: number) => loaded(stagger * (i + 2));
@@ -28,7 +30,7 @@ export const SiteMockup: React.FC<{
   const spin = (frame * 20) % 360;
   return (
     <div
-      dir="rtl"
+      dir={dir}
       style={{
         width,
         height,
@@ -62,9 +64,16 @@ export const SiteMockup: React.FC<{
         </div>
         {!mobile && (
           <div style={{display: 'flex', gap: 28 * s}}>
-            {['الرئيسية', 'خدماتنا', 'أعمالنا', 'تواصل'].map((t) => (
-              <div key={t} style={{fontSize: 18 * s, fontWeight: 600, color: colors.muted}}>
-                {t}
+            {t.siteNav.map((n) => (
+              <div
+                key={n}
+                style={{
+                  fontSize: 18 * s,
+                  fontWeight: 600,
+                  color: colors.muted,
+                }}
+              >
+                {n}
               </div>
             ))}
           </div>
@@ -79,13 +88,18 @@ export const SiteMockup: React.FC<{
             borderRadius: 99,
           }}
         >
-          ابدأ مشروعك
+          {t.siteCta}
         </div>
       </div>
       {/* hero */}
       <div style={{padding: pad, paddingTop: pad * 1.1, position: 'relative'}}>
         {hero > 0.05 ? (
-          <div style={{opacity: Math.min(1, hero * 1.5), transform: `translateY(${(1 - hero) * 20}px)`}}>
+          <div
+            style={{
+              opacity: Math.min(1, hero * 1.5),
+              transform: `translateY(${(1 - hero) * 20}px)`,
+            }}
+          >
             <div
               style={{
                 display: 'inline-block',
@@ -97,7 +111,7 @@ export const SiteMockup: React.FC<{
                 borderRadius: 99,
               }}
             >
-              تطوير وتصميم مواقع
+              {t.siteTag}
             </div>
             <div
               style={{
@@ -109,18 +123,44 @@ export const SiteMockup: React.FC<{
                 maxWidth: mobile ? '100%' : '56%',
               }}
             >
-              موقع يعكس احترافية شركتك ويظهر في قوقل
+              {t.siteHero}
             </div>
-            <div style={{display: 'flex', flexDirection: 'column', gap: 10 * s, marginTop: 18 * s, maxWidth: mobile ? '90%' : '48%'}}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 10 * s,
+                marginTop: 18 * s,
+                maxWidth: mobile ? '90%' : '48%',
+              }}
+            >
               <Line w="100%" h={10 * s} color={colors.line} />
               <Line w="72%" h={10 * s} color={colors.line} />
             </div>
             <div style={{display: 'flex', gap: 12 * s, marginTop: 22 * s}}>
-              <div style={{fontSize: 16 * s, fontWeight: 700, color: '#fff', background: colors.navy, padding: `${10 * s}px ${22 * s}px`, borderRadius: 12 * s}}>
-                اطلب عرض سعر
+              <div
+                style={{
+                  fontSize: 16 * s,
+                  fontWeight: 700,
+                  color: '#fff',
+                  background: colors.navy,
+                  padding: `${10 * s}px ${22 * s}px`,
+                  borderRadius: 12 * s,
+                }}
+              >
+                {t.siteBtn1}
               </div>
-              <div style={{fontSize: 16 * s, fontWeight: 700, color: colors.navy, border: `1.5px solid ${colors.line}`, padding: `${10 * s}px ${22 * s}px`, borderRadius: 12 * s}}>
-                شاهد أعمالنا
+              <div
+                style={{
+                  fontSize: 16 * s,
+                  fontWeight: 700,
+                  color: colors.navy,
+                  border: `1.5px solid ${colors.line}`,
+                  padding: `${10 * s}px ${22 * s}px`,
+                  borderRadius: 12 * s,
+                }}
+              >
+                {t.siteBtn2}
               </div>
             </div>
           </div>
@@ -139,7 +179,7 @@ export const SiteMockup: React.FC<{
           <div
             style={{
               position: 'absolute',
-              left: pad,
+              insetInlineEnd: pad,
               top: pad * 1.5,
               width: 230 * s,
               height: 190 * s,
@@ -150,13 +190,40 @@ export const SiteMockup: React.FC<{
               boxShadow: '0 30px 50px -20px rgba(18,32,184,0.5)',
             }}
           >
-            <div style={{position: 'absolute', right: 22 * s, bottom: 22 * s, width: 70 * s, height: 6 * s, background: colors.gold, borderRadius: 99}} />
-            <div style={{position: 'absolute', right: 22 * s, bottom: 40 * s, width: 120 * s, height: 10 * s, background: 'rgba(255,255,255,0.7)', borderRadius: 99}} />
+            <div
+              style={{
+                position: 'absolute',
+                insetInlineStart: 22 * s,
+                bottom: 22 * s,
+                width: 70 * s,
+                height: 6 * s,
+                background: colors.gold,
+                borderRadius: 99,
+              }}
+            />
+            <div
+              style={{
+                position: 'absolute',
+                insetInlineStart: 22 * s,
+                bottom: 40 * s,
+                width: 120 * s,
+                height: 10 * s,
+                background: 'rgba(255,255,255,0.7)',
+                borderRadius: 99,
+              }}
+            />
           </div>
         )}
       </div>
       {/* cards */}
-      <div style={{display: 'flex', gap: 16 * s, padding: `0 ${pad}px`, flexWrap: 'wrap'}}>
+      <div
+        style={{
+          display: 'flex',
+          gap: 16 * s,
+          padding: `0 ${pad}px`,
+          flexWrap: 'wrap',
+        }}
+      >
         {[0, 1, 2].map((i) => {
           const p = block(i);
           const w = mobile ? '100%' : `calc(33.33% - ${11 * s}px)`;
@@ -177,9 +244,24 @@ export const SiteMockup: React.FC<{
             >
               {p > 0.05 && (
                 <>
-                  <div style={{width: 34 * s, height: 34 * s, borderRadius: 10 * s, background: i === 1 ? colors.gold : colors.blue, opacity: 0.9}} />
-                  <div style={{fontSize: 17 * s, fontWeight: 700, color: colors.navy, marginTop: 14 * s}}>
-                    {['تصميم UI/UX', 'تطوير مواقع', 'تحسين SEO'][i]}
+                  <div
+                    style={{
+                      width: 34 * s,
+                      height: 34 * s,
+                      borderRadius: 10 * s,
+                      background: i === 1 ? colors.gold : colors.blue,
+                      opacity: 0.9,
+                    }}
+                  />
+                  <div
+                    style={{
+                      fontSize: 17 * s,
+                      fontWeight: 700,
+                      color: colors.navy,
+                      marginTop: 14 * s,
+                    }}
+                  >
+                    {t.siteCards[i]}
                   </div>
                   {!mobile && <Line w="80%" h={8 * s} style={{marginTop: 10 * s}} />}
                 </>

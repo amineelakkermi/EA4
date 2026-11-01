@@ -4,12 +4,7 @@ import {colors, fonts} from '../../theme';
 import {sp, springs, clamp, ease} from '../../anim';
 import {GMark, SearchIcon} from '../Icons';
 import {Typed, Line} from './Typed';
-
-const results = [
-  {title: 'شركة تصميم مواقع — الرياض', url: 'competitor-one.sa'},
-  {title: 'أفضل شركات برمجة المواقع في السعودية', url: 'webagency-ksa.com'},
-  {title: 'تصميم موقع احترافي لشركتك', url: 'design-studio.sa'},
-];
+import {useLang} from '../../i18n';
 
 /**
  * Google-style results page. The query types in, results populate, and the
@@ -25,12 +20,14 @@ export const SearchPage: React.FC<{
 }> = ({typeStart, query, resultsAt, ghostAt, width = 880}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
+  const {t, dir, k} = useLang();
+  const results = t.spResults;
   const ghost = sp(frame, fps, ghostAt, springs.smooth);
   const ghostPulse = 0.5 + 0.5 * Math.sin((frame - ghostAt) / 6);
   const scale = width / 880;
   return (
     <div
-      dir="rtl"
+      dir={dir}
       style={{
         width,
         padding: 44 * scale,
@@ -54,7 +51,7 @@ export const SearchPage: React.FC<{
       >
         <GMark size={44 * scale} />
         <div style={{flex: 1}}>
-          <Typed text={query} start={typeStart} cps={0.55} size={36 * scale} />
+          <Typed text={query} start={typeStart} cps={0.55 / k} size={36 * scale * k} />
         </div>
         <div
           style={{
@@ -71,8 +68,15 @@ export const SearchPage: React.FC<{
         </div>
       </div>
       {/* tabs */}
-      <div style={{display: 'flex', gap: 34 * scale, marginTop: 30 * scale, paddingRight: 24 * scale}}>
-        {['الكل', 'صور', 'خرائط', 'أخبار'].map((t, i) => (
+      <div
+        style={{
+          display: 'flex',
+          gap: 34 * scale,
+          marginTop: 30 * scale,
+          paddingInlineStart: 24 * scale,
+        }}
+      >
+        {t.spTabs.map((t, i) => (
           <div
             key={t}
             style={{
@@ -89,7 +93,14 @@ export const SearchPage: React.FC<{
       </div>
       <div style={{height: 1, background: colors.line, marginTop: -1}} />
       {/* results */}
-      <div style={{display: 'flex', flexDirection: 'column', gap: 30 * scale, marginTop: 34 * scale}}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 30 * scale,
+          marginTop: 34 * scale,
+        }}
+      >
         {results.map((r, i) => {
           const p = sp(frame, fps, resultsAt + i * 5, springs.smooth);
           return (
@@ -98,10 +109,16 @@ export const SearchPage: React.FC<{
               style={{
                 opacity: Math.min(1, p * 1.5),
                 transform: `translateY(${(1 - p) * 26}px)`,
-                paddingRight: 24 * scale,
+                paddingInlineStart: 24 * scale,
               }}
             >
-              <div style={{display: 'flex', alignItems: 'center', gap: 14 * scale}}>
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 14 * scale,
+                }}
+              >
                 <div
                   style={{
                     width: 36 * scale,
@@ -111,12 +128,35 @@ export const SearchPage: React.FC<{
                     border: `1px solid ${colors.line}`,
                   }}
                 />
-                <div style={{fontFamily: fonts.latin, fontSize: 20 * scale, color: colors.muted, direction: 'ltr'}}>
+                <div
+                  style={{
+                    fontFamily: fonts.latin,
+                    fontSize: 20 * scale,
+                    color: colors.muted,
+                    direction: 'ltr',
+                  }}
+                >
                   {r.url}
                 </div>
               </div>
-              <div style={{fontSize: 30 * scale, fontWeight: 600, color: '#1A0DAB', marginTop: 10 * scale}}>{r.title}</div>
-              <div style={{display: 'flex', flexDirection: 'column', gap: 10 * scale, marginTop: 14 * scale}}>
+              <div
+                style={{
+                  fontSize: 30 * scale * k,
+                  fontWeight: 600,
+                  color: '#1A0DAB',
+                  marginTop: 10 * scale,
+                }}
+              >
+                {r.title}
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 10 * scale,
+                  marginTop: 14 * scale,
+                }}
+              >
                 <Line w="92%" h={11 * scale} />
                 <Line w="68%" h={11 * scale} />
               </div>
@@ -138,8 +178,24 @@ export const SearchPage: React.FC<{
           }}
         >
           <div>
-            <div style={{fontSize: 30 * scale, fontWeight: 700, color: colors.red}}>موقعك؟</div>
-            <div style={{fontSize: 22 * scale, color: colors.muted, marginTop: 6 * scale}}>غير موجود في النتائج الأولى</div>
+            <div
+              style={{
+                fontSize: 30 * scale,
+                fontWeight: 700,
+                color: colors.red,
+              }}
+            >
+              {t.spGhost}
+            </div>
+            <div
+              style={{
+                fontSize: 22 * scale,
+                color: colors.muted,
+                marginTop: 6 * scale,
+              }}
+            >
+              {t.spGhostSub}
+            </div>
           </div>
           <div
             style={{
@@ -150,10 +206,10 @@ export const SearchPage: React.FC<{
               background: colors.redSoft,
               padding: `${8 * scale}px ${16 * scale}px`,
               borderRadius: 99,
-              direction: 'rtl',
+              whiteSpace: 'nowrap',
             }}
           >
-            الصفحة 7+
+            {t.spPage}
           </div>
         </div>
       </div>

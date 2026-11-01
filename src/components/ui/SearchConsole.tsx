@@ -4,42 +4,86 @@ import {colors, fonts} from '../../theme';
 import {sp, springs, clamp, ease} from '../../anim';
 import {CheckIcon, SearchIcon, GlobeIcon, DocIcon, TrendIcon} from '../Icons';
 import {Typed, Line} from './Typed';
+import {useLang} from '../../i18n';
 
 /**
  * Search Console-inspired URL inspection: a URL is typed, inspected, found
  * NOT indexed; the owner requests indexing and gets a "request sent" note.
  * Deliberately no fabricated ranking data and no promise of results.
  */
-export const SearchConsole: React.FC<{start: number; width?: number; requestAt: number}> = ({start, width = 900, requestAt}) => {
+export const SearchConsole: React.FC<{
+  start: number;
+  width?: number;
+  requestAt: number;
+}> = ({start, width = 900, requestAt}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
-  const s = width / 900;
+  const {t, dir, k} = useLang();
+  const s = (width / 900) * k;
   const url = 'ea-4.vercel.app/services';
   const typeStart = start + 6;
   const inspectAt = typeStart + Math.ceil(url.length / 0.9) + 8;
-  const spin = interpolate(frame, [inspectAt, inspectAt + 18], [0, 1], {...clamp});
+  const spin = interpolate(frame, [inspectAt, inspectAt + 18], [0, 1], {
+    ...clamp,
+  });
   const verdict = sp(frame, fps, inspectAt + 18, springs.smooth);
-  const warn = interpolate(frame, [inspectAt + 22, inspectAt + 36], [0, 1], {...clamp, easing: ease.out});
+  const warn = interpolate(frame, [inspectAt + 22, inspectAt + 36], [0, 1], {
+    ...clamp,
+    easing: ease.out,
+  });
   const press = interpolate(frame, [requestAt, requestAt + 4, requestAt + 10], [1, 0.94, 1], {...clamp});
   const sent = sp(frame, fps, requestAt + 8, springs.snappy);
   const amber = '#C9871F';
   const amberSoft = '#FCF1DE';
   const nav = [
-    {t: 'نظرة عامة', i: <GlobeIcon size={24 * s} />},
-    {t: 'فحص عنوان URL', i: <SearchIcon size={24 * s} color={colors.blue} />, active: true},
-    {t: 'الأداء', i: <TrendIcon size={24 * s} color={colors.muted} />},
-    {t: 'الصفحات', i: <DocIcon size={24 * s} color={colors.muted} />},
+    {t: t.scNav[0], i: <GlobeIcon size={24 * s} />},
+    {
+      t: t.scNav[1],
+      i: <SearchIcon size={24 * s} color={colors.blue} />,
+      active: true,
+    },
+    {t: t.scNav[2], i: <TrendIcon size={24 * s} color={colors.muted} />},
+    {t: t.scNav[3], i: <DocIcon size={24 * s} color={colors.muted} />},
   ];
   const rows: [string, string, 'ok' | 'warn' | 'na'][] = [
-    ['الزحف', 'لم يتم الزحف بعد', 'na'],
-    ['الفهرسة', 'غير مفهرسة', 'warn'],
-    ['ملاءمة الجوال', 'لم يتم الفحص', 'na'],
+    [t.scRows[0][0], t.scRows[0][1], 'na'],
+    [t.scRows[1][0], t.scRows[1][1], 'warn'],
+    [t.scRows[2][0], t.scRows[2][1], 'na'],
   ];
   return (
-    <div dir="rtl" style={{width, display: 'flex', fontFamily: fonts.arabic, height: 780 * s}}>
-      <div style={{width: 250 * s, background: colors.surfaceAlt, borderLeft: `1px solid ${colors.line}`, padding: 26 * s}}>
-        <div style={{display: 'flex', alignItems: 'center', gap: 10 * s, marginBottom: 30 * s}}>
-          <div style={{width: 34 * s, height: 34 * s, borderRadius: 10 * s, background: colors.blue}} />
+    <div
+      dir={dir}
+      style={{
+        width,
+        display: 'flex',
+        fontFamily: fonts.arabic,
+        height: (780 * s) / k,
+      }}
+    >
+      <div
+        style={{
+          width: 250 * s,
+          background: colors.surfaceAlt,
+          borderInlineEnd: `1px solid ${colors.line}`,
+          padding: 26 * s,
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 10 * s,
+            marginBottom: 30 * s,
+          }}
+        >
+          <div
+            style={{
+              width: 34 * s,
+              height: 34 * s,
+              borderRadius: 10 * s,
+              background: colors.blue,
+            }}
+          />
           <div style={{fontSize: 20 * s, fontWeight: 700, color: colors.navy}}>Search Console</div>
         </div>
         {nav.map((n) => (
@@ -80,8 +124,15 @@ export const SearchConsole: React.FC<{start: number; width?: number; requestAt: 
           <SearchIcon size={30 * s} color={colors.muted} />
           <Typed text={url} start={typeStart} cps={0.9} size={26 * s} dir="ltr" color={colors.ink} weight={500} />
         </div>
-        <div style={{fontSize: 20 * s, color: colors.muted, marginTop: 14 * s, paddingRight: 10 * s}}>
-          فحص أي عنوان URL في موقعك
+        <div
+          style={{
+            fontSize: 20 * s,
+            color: colors.muted,
+            marginTop: 14 * s,
+            paddingInlineStart: 10 * s,
+          }}
+        >
+          {t.scHint}
         </div>
 
         {/* inspecting */}
@@ -104,7 +155,7 @@ export const SearchConsole: React.FC<{start: number; width?: number; requestAt: 
               transform: `rotate(${(frame - inspectAt) * 24}deg)`,
             }}
           />
-          <div style={{fontSize: 22 * s, color: colors.muted, fontWeight: 600}}>جارٍ فحص الصفحة…</div>
+          <div style={{fontSize: 22 * s, color: colors.muted, fontWeight: 600}}>{t.scInspecting}</div>
         </div>
 
         {/* verdict card */}
@@ -137,15 +188,48 @@ export const SearchConsole: React.FC<{start: number; width?: number; requestAt: 
                 position: 'relative',
               }}
             >
-              <div style={{width: 6 * s, height: 26 * s, borderRadius: 3, background: amber, transform: `scaleY(${warn})`, transformOrigin: 'top'}} />
-              <div style={{position: 'absolute', bottom: 16 * s, width: 7 * s, height: 7 * s, borderRadius: 99, background: amber, opacity: warn}} />
+              <div
+                style={{
+                  width: 6 * s,
+                  height: 26 * s,
+                  borderRadius: 3,
+                  background: amber,
+                  transform: `scaleY(${warn})`,
+                  transformOrigin: 'top',
+                }}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  bottom: 16 * s,
+                  width: 7 * s,
+                  height: 7 * s,
+                  borderRadius: 99,
+                  background: amber,
+                  opacity: warn,
+                }}
+              />
             </div>
             <div>
-              <div style={{fontSize: 29 * s, fontWeight: 700, color: amber}}>الصفحة غير موجودة على قوقل</div>
-              <div style={{fontSize: 20 * s, color: colors.muted, marginTop: 6 * s}}>هذه الصفحة ما تمت فهرستها بعد، فما تقدر تظهر في نتائج البحث</div>
+              <div style={{fontSize: 29 * s, fontWeight: 700, color: amber}}>{t.scVerdict}</div>
+              <div
+                style={{
+                  fontSize: 20 * s,
+                  color: colors.muted,
+                  marginTop: 6 * s,
+                }}
+              >
+                {t.scVerdictSub}
+              </div>
             </div>
           </div>
-          <div style={{height: 1, background: colors.line, margin: `${22 * s}px 0`}} />
+          <div
+            style={{
+              height: 1,
+              background: colors.line,
+              margin: `${22 * s}px 0`,
+            }}
+          />
           {rows.map(([k, v, st], i) => {
             const p = sp(frame, fps, inspectAt + 30 + i * 4, springs.smooth);
             const c = st === 'warn' ? amber : colors.faint;
@@ -161,16 +245,47 @@ export const SearchConsole: React.FC<{start: number; width?: number; requestAt: 
                   transform: `translateX(${(1 - p) * 20}px)`,
                 }}
               >
-                <div style={{fontSize: 22 * s, color: colors.ink, fontWeight: 600}}>{k}</div>
-                <div style={{display: 'flex', alignItems: 'center', gap: 10 * s, color: c, fontSize: 21 * s, fontWeight: 600}}>
-                  <div style={{width: 12 * s, height: 12 * s, borderRadius: 99, background: c}} />
+                <div
+                  style={{
+                    fontSize: 22 * s,
+                    color: colors.ink,
+                    fontWeight: 600,
+                  }}
+                >
+                  {k}
+                </div>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 10 * s,
+                    color: c,
+                    fontSize: 21 * s,
+                    fontWeight: 600,
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 12 * s,
+                      height: 12 * s,
+                      borderRadius: 99,
+                      background: c,
+                    }}
+                  />
                   {v}
                 </div>
               </div>
             );
           })}
           {/* request indexing */}
-          <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 18 * s}}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginTop: 18 * s,
+            }}
+          >
             <div
               style={{
                 fontSize: 21 * s,
@@ -187,14 +302,32 @@ export const SearchConsole: React.FC<{start: number; width?: number; requestAt: 
               }}
             >
               {sent > 0.5 && <CheckIcon size={20 * s} color={colors.green} progress={sent} />}
-              {sent > 0.5 ? 'تم إرسال طلب الفهرسة' : 'طلب الفهرسة'}
+              {sent > 0.5 ? t.scSent : t.scRequest}
             </div>
-            <div style={{fontSize: 18 * s, color: colors.muted, opacity: Math.min(1, sent * 1.4), transform: `translateX(${(1 - sent) * -16}px)`}}>
-              قوقل راح يراجع الصفحة، والفهرسة تاخذ وقت
+            <div
+              style={{
+                fontSize: 18 * s,
+                color: colors.muted,
+                marginInlineStart: 16 * s,
+                opacity: Math.min(1, sent * 1.4),
+                transform: `translateX(${(1 - sent) * -16}px)`,
+              }}
+            >
+              {t.scNote}
             </div>
           </div>
         </div>
-        <div style={{position: 'absolute', left: 34 * s, right: 34 * s, bottom: 30 * s, display: 'flex', flexDirection: 'column', gap: 10 * s}}>
+        <div
+          style={{
+            position: 'absolute',
+            left: 34 * s,
+            right: 34 * s,
+            bottom: 30 * s,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 10 * s,
+          }}
+        >
           <Line w="60%" h={10 * s} />
           <Line w="40%" h={10 * s} />
         </div>
