@@ -15,7 +15,7 @@ node scripts/stills.mjs 15 120 300               # QA stills -> out/stills/
 
 ## Assets
 - Fonts: IBM Plex Sans Arabic (OFL), Alexandria (OFL) in `public/fonts`.
-- Music: Kevin MacLeod — "Floating Cities" (incompetech.com, CC BY 4.0), trimmed/normalised to `public/audio/music.wav`.
+- Music: Kevin MacLeod — "Inspired" (incompetech.com, CC BY 4.0), trimmed/normalised to `public/audio/music.wav`.
 - SFX: synthesised with ffmpeg (`public/audio/*.wav`).
 - Logo: `public/img/ea4-logo.png` (from the EA4 repo).
 
