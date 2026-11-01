@@ -65,5 +65,5 @@ export const LogoMark: React.FC<{size?: number; delay?: number; color?: string; 
 };
 
 export const LogoImage: React.FC<{size?: number; style?: React.CSSProperties}> = ({size = 120, style}) => (
-  <Img src={staticFile('img/ea4-logo.png')} style={{width: size, height: size, ...style}} />
+  <Img src={staticFile('img/ea4-logo-full.png')} style={{width: size, height: size * (574 / 790), ...style}} />
 );

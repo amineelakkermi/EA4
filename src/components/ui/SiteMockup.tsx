@@ -1,3 +1,4 @@
+import {Img, staticFile} from 'remotion';
 import React from 'react';
 import {useCurrentFrame, useVideoConfig, interpolate} from 'remotion';
 import {colors, fonts} from '../../theme';
@@ -57,7 +58,7 @@ export const SiteMockup: React.FC<{
               borderLeftColor: 'transparent',
             }}
           />
-          <div style={{fontFamily: fonts.latin, fontWeight: 600, fontSize: 22 * s, color: colors.navy, letterSpacing: 1}}>EA4</div>
+          <Img src={staticFile('img/ea4-logo-mark.png')} style={{height: 20 * s, display: 'block'}} />
         </div>
         {!mobile && (
           <div style={{display: 'flex', gap: 28 * s}}>

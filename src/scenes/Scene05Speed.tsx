@@ -9,7 +9,7 @@ import {colors, fonts} from '../theme';
 import {clamp, ease, sp, springs} from '../anim';
 import {BoltIcon} from '../components/Icons';
 
-const WIPE_AT = 56;
+export const WIPE_AT = 64;
 
 /** Slow (skeleton + spinner) devices get swept by a blue light wipe into the fast, loaded version */
 export const Scene05Speed: React.FC = () => {
@@ -24,7 +24,7 @@ export const Scene05Speed: React.FC = () => {
   const fastBar = interpolate(frame, [WIPE_AT + 4, WIPE_AT + 20], [0, 1], {...clamp, easing: ease.out});
 
   const Devices: React.FC<{fast: boolean}> = ({fast}) => (
-    <div style={{position: 'absolute', top: 720, left: 80, width: 1000, height: 760}}>
+    <div style={{position: 'absolute', top: 700, left: 80, width: 1000, height: 760}}>
       <div style={{position: 'absolute', left: 0, top: 40, transform: 'rotateY(10deg) rotateX(3deg)', transformStyle: 'preserve-3d'}}>
         <Laptop width={lapW}>
           <BrowserFrame url="ea-4.vercel.app" barHeight={40}>
@@ -87,8 +87,8 @@ export const Scene05Speed: React.FC = () => {
 
   return (
     <Stage>
-      <Camera keys={[{frame: 0, scale: 1.0}, {frame: WIPE_AT, scale: 1.02}, {frame: 134, scale: 1.08, y: -30}]}>
-        <TipHeader n="03" title="اهتم بسرعة موقعك" body="خلّ تجربة التصفح سريعة وممتازة على الجوال." delay={4} />
+      <Camera keys={[{frame: 0, scale: 1.0}, {frame: WIPE_AT, scale: 1.02}, {frame: 164, scale: 1.08, y: -30}]}>
+        <TipHeader n="04" title="اهتم بسرعة الموقع، وتأكد إنه يشتغل بشكل ممتاز على الجوال." delay={4} titleSize={58} />
         <AbsoluteFill style={{perspective: 2400, opacity: Math.min(1, enter * 1.5), transform: `translateY(${(1 - enter) * 80}px)`}}>
           <Devices fast={false} />
           <AbsoluteFill style={{clipPath: `inset(0 ${(1 - wipe) * 100}% 0 0)`}}>
