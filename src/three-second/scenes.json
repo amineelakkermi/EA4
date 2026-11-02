@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "title": "EA4 — The 3-Second Test",
+    "width": 1080,
+    "height": 1920,
+    "fps": 30,
+    "durationSeconds": 36,
+    "challengeSeconds": 3,
+    "language": "ar",
+    "direction": "rtl"
+  },
+  "scenes": [
+    {"id": "hook", "start": 0, "end": 3},
+    {"id": "round1", "start": 3, "end": 8, "site": "vague"},
+    {"id": "round2", "start": 8, "end": 13, "site": "clear"},
+    {"id": "round3", "start": 13, "end": 18, "site": "confusing"},
+    {"id": "results", "start": 18, "end": 25},
+    {"id": "transformation", "start": 25, "end": 31},
+    {"id": "cta", "start": 31, "end": 36}
+  ],
+  "hook": {
+    "challenge": "عندك 3 ثوانٍ فقط... تقدر تعرف هالشركة وش تبيع؟",
+    "highlight": ["3", "ثوانٍ", "فقط..."]
+  },
+  "rounds": {
+    "vague": {
+      "label": "الموقع الأول",
+      "question": "عرفت وش يبيعون؟",
+      "questionHighlight": ["وش"]
+    },
+    "clear": {
+      "label": "الموقع الثاني",
+      "question": "هالمرة عرفت، صح؟",
+      "questionHighlight": ["عرفت،"]
+    },
+    "confusing": {
+      "label": "الموقع الثالث",
+      "question": "وهذي؟ عرفت نشاطهم؟",
+      "questionHighlight": ["نشاطهم؟"]
+    }
+  },
+  "sites": {
+    "vague": {
+      "brand": "الأفق للاستشارات",
+      "url": "alofoq-consulting.sa",
+      "nav": ["الرئيسية", "من نحن", "خدماتنا", "اتصل بنا"],
+      "headline": "حلول مبتكرة لمستقبل أفضل",
+      "subheadline": "نؤمن بالتميز والجودة ونصنع الفرق.",
+      "cta": "اكتشف المزيد"
+    },
+    "clear": {
+      "brand": "تبريد الرياض",
+      "url": "tabreed-riyadh.sa",
+      "nav": ["الرئيسية", "خدماتنا", "الأسعار", "تواصل"],
+      "headline": "تركيب وصيانة المكيفات في الرياض",
+      "subheadline": "فنيون متخصصون وخدمة سريعة في منزلك.",
+      "cta": "احجز فني الآن",
+      "badges": ["خدمة في نفس اليوم", "ضمان على التركيب", "فنيون معتمدون"]
+    },
+    "confusing": {
+      "brand": "مجموعة النخبة القابضة",
+      "url": "elite-group-holding.com",
+      "nav": ["من نحن", "رؤيتنا", "قيمنا", "خبراتنا", "شركاؤنا", "أخبارنا", "اتصل بنا"],
+      "headline": "رؤيتنا. قيمنا. خبراتنا.",
+      "subheadline": "نحو آفاق جديدة من التميز المؤسسي والريادة",
+      "cta": "المزيد",
+      "sections": ["رؤيتنا", "قيمنا", "خبراتنا", "شركاؤنا"],
+      "partnersTitle": "شركاؤنا في النجاح",
+      "newsTitle": "آخر الأخبار",
+      "carousel": ["التميز المؤسسي", "الريادة والابتكار", "شراكات استراتيجية"]
+    }
+  },
+  "results": {
+    "title": "النتيجة",
+    "unclear": "غير واضح",
+    "clear": "واضح من أول نظرة",
+    "statementBefore": "موقع",
+    "statementNumber": "واحد",
+    "statementAfter": "فقط من أصل ثلاثة كان واضحاً!",
+    "note": "نتيجة وضوح الرسالة في هذا الاختبار، وليست نسبة تحويل مقاسة."
+  },
+  "transformation": {
+    "tag": "نفس الشركة. تغيير واحد فقط.",
+    "before": "حلول مبتكرة لمستقبل أفضل",
+    "after": "نساعد الشركات على بناء مواقع احترافية تزيد فرص وصولها للعملاء.",
+    "caption": "الفرق؟ الآن فهمت وش يقدمون.",
+    "captionHighlight": ["فهمت"]
+  },
+  "cta": {
+    "formulaPrefix": "نقدم",
+    "formulaService": "[الخدمة]",
+    "formulaFor": "لـ",
+    "formulaClient": "[العميل]",
+    "formulaIn": "في",
+    "formulaPlace": "[المكان]",
+    "commentPrompt": "وش مجال شركتك؟ اكتبه بالتعليقات.",
+    "commentHighlight": ["بالتعليقات."],
+    "secondary": "خلّنا نشوف إذا يقدر العميل يفهم نشاطك خلال 3 ثوانٍ!",
+    "bubblePlaceholder": "اكتب مجال شركتك...",
+    "brandTagline": "Web Developer & Designer"
+  }
+}

@@ -4,12 +4,14 @@ Remotion 4 project for EA4 brand videos.
 
 ## Compositions
 - `EA4SeoReel` — 1080×1920 @30fps, 32 s Instagram Reel: "عندك موقع إلكتروني، لكن ما يظهر في نتائج قوقل؟" (5 SEO tips + brand reveal). No voiceover: music + SFX only.
+- `EA4ThreeSecondTest` — 1080×1920 @30fps, 36 s Instagram Reel: "اختبار الـ3 ثوانٍ" (3 fictional websites, 1 is clear). Source in `src/three-second/` — see [src/three-second/README.md](src/three-second/README.md). No voiceover: music + SFX only.
 
 ## Commands
 ```bash
 npm install
 npm run studio                                   # preview
 npx remotion render EA4SeoReel out/reel.mp4      # render
+npx remotion render EA4ThreeSecondTest out/final.mp4 --codec h264 --crf 18 --audio-codec aac   # 3-second test reel
 node scripts/stills.mjs 15 120 300               # QA stills -> out/stills/
 ```
 
