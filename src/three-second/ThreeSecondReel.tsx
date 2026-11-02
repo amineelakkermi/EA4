@@ -76,7 +76,7 @@ const musicVolume = (f: number) =>
 export const ThreeSecondReel: React.FC = () => {
   loadFonts();
   return (
-    <AbsoluteFill style={{backgroundColor: palette.bg}}>
+    <AbsoluteFill style={{backgroundColor: palette.bg, fontSynthesis: 'none'}}>
       <Sequence from={hook.from} durationInFrames={hook.duration} layout="none">
         <Hook />
       </Sequence>

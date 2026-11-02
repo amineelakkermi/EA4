@@ -22,7 +22,7 @@ type Props = {
 const strip = (w: string) => w.replace(/[،؟!.?,:;…]/g, '');
 
 /**
- * Large Cairo caption. Words rise one by one from behind a mask (or pop with a
+ * Large Arabic caption (The Year of Handicrafts). Words rise one by one from behind a mask (or pop with a
  * spring) and selected words are coloured red/green. RTL is explicit so the
  * line breaks follow Arabic reading order.
  */

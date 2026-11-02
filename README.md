@@ -11,7 +11,7 @@ Remotion 4 project for EA4 brand videos.
 npm install
 npm run studio                                   # preview
 npx remotion render EA4SeoReel out/reel.mp4      # render
-npx remotion render EA4ThreeSecondTest out/final.mp4 --codec h264 --crf 18 --audio-codec aac   # 3-second test reel
+npx remotion render EA4ThreeSecondTest out/final-v3.mp4 --codec h264 --crf 18 --audio-codec aac   # 3-second test reel
 node scripts/stills.mjs 15 120 300               # QA stills -> out/stills/
 ```
 

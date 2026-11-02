@@ -5,8 +5,7 @@ const faces: Array<[string, string, number]> = [
   ['IBM Plex Sans Arabic', 'IBMPlexSansArabic-Medium.ttf', 500],
   ['IBM Plex Sans Arabic', 'IBMPlexSansArabic-SemiBold.ttf', 600],
   ['IBM Plex Sans Arabic', 'IBMPlexSansArabic-Bold.ttf', 700],
-  ['Cairo', 'Cairo-Bold.ttf', 700],
-  ['Cairo', 'Cairo-Black.ttf', 900],
+  ['The Year of Handicrafts', 'TheYearofHandicrafts-Regular.otf', 400],
 ];
 
 let loaded: Promise<void> | null = null;

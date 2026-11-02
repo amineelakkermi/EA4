@@ -33,10 +33,13 @@ export const palette = {
   blue: '#2563EB',
 } as const;
 
+/** The Year of Handicrafts ships a single Regular weight: hierarchy comes from size/colour,
+ *  `font-synthesis: none` (set on the composition root) stops the browser from faux-bolding it.
+ *  IBM Plex is only a fallback for Latin URLs / glyphs the font lacks. */
 export const font = {
-  family: "'Cairo', 'IBM Plex Sans Arabic', sans-serif",
-  black: 900,
-  bold: 700,
+  family: "'The Year of Handicrafts', 'IBM Plex Sans Arabic', sans-serif",
+  black: 400,
+  bold: 400,
 } as const;
 
 export const shadow = {

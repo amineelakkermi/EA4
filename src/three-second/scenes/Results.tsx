@@ -4,7 +4,7 @@ import {Stage} from '../components/Stage';
 import {Center} from '../components/Layout';
 import {Caption, Tag} from '../components/Caption';
 import {XMark, CheckMark} from '../components/Marks';
-import {Mockup, SiteKey} from './Round';
+import {SiteThumb, SiteKey} from '../components/Showcase';
 import {S, palette, scene, font, shadow} from '../config';
 import {clamp, ease, sp, springs} from '../../anim';
 
@@ -20,7 +20,7 @@ const rows: Array<{site: SiteKey; ok: boolean}> = [
   {site: 'confusing', ok: false},
 ];
 
-/** 18–25 s: the three mockups as cards with X / ✓ reveals, then the "1 of 3" statement */
+/** 18–25 s: the three website screenshots as cards with X / check reveals, then the "1 of 3" statement */
 export const Results: React.FC = () => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
@@ -61,7 +61,7 @@ export const Results: React.FC = () => {
               <div style={{position: 'absolute', inset: 0, background: r.ok ? `linear-gradient(90deg, ${palette.greenSoft}00, ${palette.greenSoft})` : `linear-gradient(90deg, ${palette.redSoft}00, ${palette.redSoft})`, opacity: interpolate(frame, [MARK_AT[i], MARK_AT[i] + 14], [0, 1], {...clamp})}} />
               <div style={{width: 300, height: rowH - 40, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative', flexShrink: 0}}>
                 <div style={{position: 'absolute', top: 0}}>
-                  <Mockup site={r.site} scale={r.site === 'clear' ? 0.3 : 0.264} />
+                  <SiteThumb site={r.site} scale={0.278} h={rowH - 40} />
                 </div>
               </div>
               <div style={{flex: 1, display: 'flex', alignItems: 'center', gap: 26, position: 'relative'}}>
