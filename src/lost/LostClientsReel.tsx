@@ -19,7 +19,6 @@ export const cues: Cue[] = [
     return [
       {file: 'whoosh.wav', at: s.from - 4, vol: 0.55},
       {file: 'pop.wav', at: s.from + 3, vol: 0.6},
-      ...(i === 0 ? [38, 68, 98].map((f) => ({file: 'tick.wav', at: s.from + f, vol: 0.4})) : []),
       {file: 'wrong.wav', at: s.from + m.x, vol: 0.6},
       ...(m.ok ? [{file: 'whoosh.wav', at: s.from + m.ok - 22, vol: 0.4}, {file: 'success.wav', at: s.from + m.ok, vol: 0.7}] : []),
     ];
