@@ -16,12 +16,12 @@ const order: Array<[SceneId, React.FC]> = [
   ['cta', Cta],
 ];
 
+const SFX_GAIN = 0.5;
 type Cue = {file: string; at: number; vol?: number};
 const s = (id: SceneId) => scene(id).from;
 export const cues: Cue[] = [
   {file: 'impact.wav', at: 0, vol: 0.6},
   ...order.slice(1).map(([id]) => ({file: 'whoosh.wav', at: s(id) - 6, vol: 0.5})),
-  ...[30, 46, 62].map((f) => ({file: 'wrong.wav', at: s('problem') + f, vol: 0.3})),
   {file: 'swell.wav', at: s('reveal') - 24, vol: 0.6},
   {file: 'impact.wav', at: s('reveal'), vol: 0.9},
   {file: 'notify.wav', at: s('brief') + 128, vol: 0.55},
@@ -51,10 +51,10 @@ export const DevinReel: React.FC = () => {
           );
         })}
       </Backdrop>
-      <Audio src={staticFile('audio/music-devin.wav')} volume={musicVolume} />
+      <Audio src={staticFile('audio/music-devin-calm.wav')} volume={musicVolume} />
       {cues.filter((c) => c.at >= 0).map((c, i) => (
         <Sequence key={i} from={c.at} durationInFrames={90} layout="none">
-          <Audio src={staticFile(`audio/${c.file}`)} volume={c.vol ?? 0.7} />
+          <Audio src={staticFile(`audio/${c.file}`)} volume={(c.vol ?? 0.7) * SFX_GAIN} />
         </Sequence>
       ))}
     </AbsoluteFill>
