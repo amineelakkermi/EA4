@@ -8,6 +8,8 @@ import {WebnestReel} from './webnest/WebnestReel';
 import {TOTAL as WN_TOTAL} from './webnest/config';
 import {LostClientsReel} from './lost/LostClientsReel';
 import {TOTAL as LC_TOTAL} from './lost/config';
+import {DevinReel} from './devin/DevinReel';
+import {TOTAL as DV_TOTAL} from './devin/config';
 
 export const Root: React.FC = () => (
   <>
@@ -16,5 +18,6 @@ export const Root: React.FC = () => (
     <Composition id="EA4ThreeSecondTest" component={ThreeSecondReel} durationInFrames={TST_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="WebnestSpeedReel" component={WebnestReel} durationInFrames={WN_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="EA4LostClientsFR" component={LostClientsReel} durationInFrames={LC_TOTAL} fps={FPS} width={W} height={H} />
+    <Composition id="DevinCreatorsReel" component={DevinReel} durationInFrames={DV_TOTAL} fps={FPS} width={W} height={H} />
   </>
 );
