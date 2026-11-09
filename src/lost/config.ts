@@ -1,4 +1,4 @@
-/** EA4 French reel "Votre site vous fait perdre des clients": EA4 palette (src/theme.ts), Alexandria (Latin; Handicrafts has no Latin glyphs), Floating Cities music. */
+/** EA4 French reel "Votre site vous fait perdre des clients": EA4 palette (src/theme.ts), Alexandria (Latin; Handicrafts has no Latin glyphs), "Getting it Done" music. */
 export const FPS = 30;
 export const W = 1080;
 export const H = 1920;

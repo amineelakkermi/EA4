@@ -13,7 +13,6 @@ const cta = scene('cta');
 
 export const cues: Cue[] = [
   {file: 'impact.wav', at: 0, vol: 0.55},
-  ...[20, 45, 70].map((f) => ({file: 'tick.wav', at: hook.from + f, vol: 0.35})),
   ...ids.flatMap((id, i) => {
     const s = scene(id);
     const m = MARKS[i];
@@ -57,7 +56,7 @@ export const LostClientsReel: React.FC = () => {
           <Fade duration={cta.duration} outF={1}><Cta /></Fade>
         </Sequence>
       </Stage>
-      <Audio src={staticFile('audio/music.wav')} volume={musicVolume} />
+      <Audio src={staticFile('audio/music-lost.wav')} volume={musicVolume} />
       {cues.filter((c) => c.at >= 0).map((c, i) => (
         <Sequence key={i} from={c.at} durationInFrames={90} layout="none">
           <Audio src={staticFile(`audio/${c.file}`)} volume={c.vol ?? 0.7} />
