@@ -1,0 +1,35 @@
+/** All on-screen French copy. NB = narrow no-break space (French typography before ? ! : and inside « »). */
+const NB = '\u202F';
+export const COPY = {
+  hook: {tag: '5 raisons', a: 'Votre site vous fait perdre des clients', b: `chaque jour… sans que vous le sachiez${NB}!`, hiA: ['perdre', 'clients'], counter: 'Clients aujourd’hui'},
+  reasons: [
+    {n: '1', title: 'Il est trop lent', line: 'Après 3 secondes d’attente, le visiteur ferme la page.', hi: ['lent']},
+    {n: '2', title: 'Son design est daté', line: 'Votre site est jugé en quelques secondes.', hi: ['daté']},
+    {n: '3', title: 'Aucun bouton de contact visible', line: 'Le visiteur ne sait pas quoi faire… alors il part.', hi: ['bouton', 'contact']},
+    {n: '4', title: 'Il n’est pas adapté au mobile', line: 'Alors que la majorité de vos visiteurs arrivent sur mobile.', hi: ['mobile']},
+    {n: '5', title: 'Rien n’inspire confiance', line: 'Pas de réalisations, pas d’avis clients.', hi: ['confiance']},
+  ],
+  statement: {a: 'Un seul de ces problèmes suffit…', b: 'pour perdre des clients dès maintenant.', hiB: ['perdre', 'clients']},
+  cta: {a: 'Commentez', word: `«${NB}MON SITE${NB}»`, b: 'et j’analyse votre site gratuitement.', save: 'Enregistrez la vidéo pour plus tard', hiB: ['gratuitement.']},
+  site: {
+    brand: 'Atelier Moreau',
+    nav: ['Accueil', 'Services', 'Réalisations', 'Contact'],
+    hero: 'Rénovation haut de gamme à Lyon',
+    heroSub: 'Plus de 15 ans d’expérience',
+    cta: 'Demander un devis',
+    services: ['Conception', 'Travaux', 'Suivi de chantier'],
+    loading: 'Chargement',
+    left: 'Visiteur parti',
+    oldHero: 'Bienvenue sur notre site officiel',
+    oldSub: 'Nous sommes une entreprise leader dans notre domaine depuis de nombreuses années.',
+    oldLinks: ['Cliquez ici', 'Plan du site', 'Livre d’or'],
+    where: `Comment les contacter${NB}?`,
+    tiny: 'Texte illisible',
+    tinyBtn: 'Boutons trop petits',
+    works: 'Nos réalisations',
+    reviews: 'Avis clients',
+    review: '« Travail soigné, délais respectés. »',
+    client: 'Claire D., Lyon',
+    empty: 'Aucun contenu',
+  },
+} as const;

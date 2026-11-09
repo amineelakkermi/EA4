@@ -1,6 +1,7 @@
 import {continueRender, delayRender, staticFile} from 'remotion';
 
-const faces: Array<[string, string, number]> = [
+const faces: Array<[string, string, number | string]> = [
+  ['Alexandria', 'Alexandria.ttf', '100 900'],
   ['IBM Plex Sans Arabic', 'IBMPlexSansArabic-Regular.ttf', 400],
   ['IBM Plex Sans Arabic', 'IBMPlexSansArabic-Medium.ttf', 500],
   ['IBM Plex Sans Arabic', 'IBMPlexSansArabic-SemiBold.ttf', 600],
