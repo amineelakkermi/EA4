@@ -10,6 +10,8 @@ import {LostClientsReel} from './lost/LostClientsReel';
 import {TOTAL as LC_TOTAL} from './lost/config';
 import {DevinReel} from './devin/DevinReel';
 import {TOTAL as DV_TOTAL} from './devin/config';
+import {RealEstateReel} from './realestate/RealEstateReel';
+import {TOTAL as RE_TOTAL} from './realestate/config';
 
 export const Root: React.FC = () => (
   <>
@@ -19,5 +21,6 @@ export const Root: React.FC = () => (
     <Composition id="WebnestSpeedReel" component={WebnestReel} durationInFrames={WN_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="EA4LostClientsFR" component={LostClientsReel} durationInFrames={LC_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="DevinCreatorsReel" component={DevinReel} durationInFrames={DV_TOTAL} fps={FPS} width={W} height={H} />
+    <Composition id="EA4RealEstateLeadsReel" component={RealEstateReel} durationInFrames={RE_TOTAL} fps={FPS} width={W} height={H} />
   </>
 );

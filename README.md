@@ -4,6 +4,7 @@ Remotion 4 project for EA4 brand videos.
 
 ## Compositions
 - `EA4SeoReel` — 1080×1920 @30fps, 32 s Instagram Reel: "عندك موقع إلكتروني، لكن ما يظهر في نتائج قوقل؟" (5 SEO tips + brand reveal). No voiceover: music + SFX only.
+- `EA4RealEstateLeadsReel` — 1080×1920 @30fps, 48 s Arabic reel: "كيف تحوّل زوار موقعك العقاري إلى عملاء فعليين؟" (hook + 7 tips + CTA). Source in `src/realestate/`. Elakkermi amine logo (`public/img/ea-amine-logo.jpg`), The Year of Handicrafts font, Unsplash property photos in `public/img/re/`, music: Kevin MacLeod "Floating Cities" (CC BY 4.0) → `public/audio/music-realestate.wav`. No voiceover.
 - `EA4ThreeSecondTest` — 1080×1920 @30fps, 36 s Instagram Reel: "اختبار الـ3 ثوانٍ" (3 fictional websites, 1 is clear). Source in `src/three-second/` — see [src/three-second/README.md](src/three-second/README.md). No voiceover: music + SFX only.
 
 ## Commands
