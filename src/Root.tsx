@@ -14,6 +14,8 @@ import {RealEstateReel} from './realestate/RealEstateReel';
 import {TOTAL as RE_TOTAL} from './realestate/config';
 import {JayekReel} from './jayek/JayekReel';
 import {TOTAL as JK_TOTAL, W as JK_W, H as JK_H} from './jayek/config';
+import {CyberReel} from './cyber/CyberReel';
+import {TOTAL as CY_TOTAL} from './cyber/config';
 
 export const Root: React.FC = () => (
   <>
@@ -24,6 +26,7 @@ export const Root: React.FC = () => (
     <Composition id="EA4LostClientsFR" component={LostClientsReel} durationInFrames={LC_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="DevinCreatorsReel" component={DevinReel} durationInFrames={DV_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="EA4RealEstateLeadsReel" component={RealEstateReel} durationInFrames={RE_TOTAL} fps={FPS} width={W} height={H} />
+    <Composition id="EA4CyberSecurityReel" component={CyberReel} durationInFrames={CY_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="JayekShowcaseX" component={JayekReel} durationInFrames={JK_TOTAL} fps={FPS} width={JK_W} height={JK_H} />
   </>
 );
