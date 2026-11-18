@@ -16,6 +16,8 @@ import {JayekReel} from './jayek/JayekReel';
 import {TOTAL as JK_TOTAL, W as JK_W, H as JK_H} from './jayek/config';
 import {CyberReel} from './cyber/CyberReel';
 import {TOTAL as CY_TOTAL} from './cyber/config';
+import {SaasReel} from './saas/SaasReel';
+import {TOTAL as SA_TOTAL} from './saas/config';
 
 export const Root: React.FC = () => (
   <>
@@ -27,6 +29,7 @@ export const Root: React.FC = () => (
     <Composition id="DevinCreatorsReel" component={DevinReel} durationInFrames={DV_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="EA4RealEstateLeadsReel" component={RealEstateReel} durationInFrames={RE_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="EA4CyberSecurityReel" component={CyberReel} durationInFrames={CY_TOTAL} fps={FPS} width={W} height={H} />
+    <Composition id="EA4SaasArchitectureReel" component={SaasReel} durationInFrames={SA_TOTAL} fps={FPS} width={W} height={H} />
     <Composition id="JayekShowcaseX" component={JayekReel} durationInFrames={JK_TOTAL} fps={FPS} width={JK_W} height={JK_H} />
   </>
 );
